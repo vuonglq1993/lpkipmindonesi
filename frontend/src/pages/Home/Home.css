@@ -1,0 +1,28 @@
+.h02 {
+    background:
+        linear-gradient(45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%) right,
+        linear-gradient(-45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%)  left,
+        #0072c6;
+}
+
+.h04{
+    background:
+    linear-gradient(45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%) right,
+    linear-gradient(-45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%)  left,
+    #006837;
+}
+
+.h05 {
+    background: url(http://toyo-coop.jp/tcsweb/wp-content/uploads/2022/03/s-back.jpg) no-repeat;
+    background-size: cover;
+    color: white;
+    min-height: 400px;
+    padding: 200px 0 200px 100px;
+  }
+
+  .h06{
+    background:
+    linear-gradient(45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%) right,
+    linear-gradient(-45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%)  left,
+    #b70000;
+}

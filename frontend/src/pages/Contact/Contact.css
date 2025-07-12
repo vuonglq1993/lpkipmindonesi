@@ -1,0 +1,38 @@
+.about-head {
+    background: url(http://toyo-coop.jp/tcsweb/wp-content/uploads/2022/05/head-title.jpg) no-repeat;
+    transform: translateY(-70px);
+    height: 210px;
+    vertical-align: middle;
+    font-weight: bold;
+    color: #fff;
+    padding-top: 70px;
+    border-bottom: 18px solid #000;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .about-head {
+      height: 150px;
+      padding-top: 50px;
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .about-head {
+      height: 120px;
+      padding-top: 40px;
+      font-size: 1.2rem;
+    }
+  }
+  
+  form input:focus,
+  form textarea:focus,
+  form select:focus {
+    box-shadow: none !important;
+    border-color: #462ba9 !important; /* tím đậm */
+    outline: none;
+  }
+  

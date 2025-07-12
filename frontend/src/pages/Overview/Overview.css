@@ -1,0 +1,77 @@
+.about-head {
+    background: url(http://toyo-coop.jp/tcsweb/wp-content/uploads/2022/05/head-title.jpg) no-repeat;
+    transform: translateY(-70px);
+    height: 210px;
+    vertical-align: middle;
+    font-weight: bold;
+    color: #fff;
+    padding-top: 70px;
+    border-bottom: 18px solid #000;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .about-head {
+      height: 150px;
+      padding-top: 50px;
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .about-head {
+      height: 120px;
+      padding-top: 40px;
+      font-size: 1.2rem;
+    }
+  }
+  
+  /* Table with only top and bottom border */
+  .table-top-bottom-border {
+    width: 100%;
+    border-collapse: collapse !important;
+    border-top: 3px solid #000000;
+    border-bottom: 3px solid #000000;
+    opacity: 1;
+    font-size: 1rem;
+    
+  }
+  
+  .table-top-bottom-border td,
+  .table-top-bottom-border th {
+    border: none !important;
+    text-align: left;
+    white-space: normal !important;
+  }
+  
+  .table-top-bottom-border tr:first-child th {
+    border-top: 2px solid #000;
+  }
+  
+  .table-top-bottom-border tr:last-child td {
+    border-bottom: 2px solid #000;
+  }
+  
+  /* Responsive table style */
+  @media (max-width: 768px) {
+    .table-top-bottom-border {
+      font-size: 0.9rem;
+    }
+  
+    .table-top-bottom-border td,
+    .table-top-bottom-border th {
+      padding: 10px 6px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .table-top-bottom-border {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-size: 0.85rem;
+    }
+  }
+  

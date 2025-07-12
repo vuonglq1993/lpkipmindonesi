@@ -1,0 +1,59 @@
+.system-head {
+  background: url(http://toyo-coop.jp/tcsweb/wp-content/uploads/2022/05/head-title.jpg) no-repeat;
+  transform: translateY(-70px);
+  height: 210px;
+  vertical-align: middle;
+  font-weight: bold;
+  color: #fff;
+  padding-top: 70px;
+  border-bottom: 18px solid #000;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+}
+
+h1 {
+  font-size: 70px !important;
+}
+
+.border-border-danger {
+  border: 3px solid #b70000;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 30px;
+}
+
+.step2 {
+  color: #b70000;
+}
+
+.skill-img {
+  transform: translateY(100px);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .system-head {
+    height: 150px;
+    padding-top: 40px;
+    transform: translateY(-40px);
+    font-size: 1.2rem;
+    border-bottom: 10px solid #000;
+  }
+
+  h1 {
+    font-size: 36px !important;
+  }
+
+  .border-border-danger {
+    margin: 15px;
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+
+  .skill-img {
+    transform: translateY(70px);
+    max-width: 100%;
+    height: auto;
+  }
+}
