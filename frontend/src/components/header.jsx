@@ -1,6 +1,7 @@
 import { Navbar, Nav, Offcanvas, NavDropdown, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from '../assets/LPKPMINDONESIA.png';
+import LanguageSwitcherNav from './LanguageSwitcher';
 
 export default function NavigationBar() {
     return (
@@ -44,6 +45,10 @@ export default function NavigationBar() {
                             <Nav.Link as={Link} to="/overview" className="me-3">Union Overview</Nav.Link>
                             <Nav.Link as={Link} to="/news" className="me-3">News</Nav.Link>
                             <Nav.Link as={Link} to="/contact" className="me-3">Contact</Nav.Link>
+
+                            <div className="d-flex align-items-center ms-3">
+                                <LanguageSwitcherNav />
+                            </div>
                         </Nav>
                     </Offcanvas.Body>
                 </Navbar.Offcanvas>

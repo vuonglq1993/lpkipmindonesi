@@ -4,7 +4,10 @@
         linear-gradient(-45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%)  left,
         #0072c6;
 }
+.home-head{
+    margin-top: -70px;
 
+}
 .h04{
     background:
     linear-gradient(45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%) right,

@@ -11,7 +11,9 @@ import SpeccificSkillSystem from "./pages/System/SpecificSkillSystem";
 import Overview from "./pages/Overview/Overview";
 import Contact from "./pages/Contact/Contact";
 import News from "./pages/News/News";
+import NewsDetail from "./pages/News/NewsDetails";
 import Footer from "./components/footer";
+
 import './App.css';
 function App() {
   return (
@@ -33,6 +35,9 @@ function App() {
                 <Route path="/overview" element ={<Overview />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/news" element={<News />} />
+                <Route path="/news/:id" element={<NewsDetail />}>
+                  
+                </Route>
 
 
                 {/* <Route path="/contact" element={<Contact />} /> */}

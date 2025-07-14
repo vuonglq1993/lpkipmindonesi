@@ -1,55 +1,66 @@
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { db } from '../../firebase/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 import ContactSection from '../../components/contact';
 import './News.css';
 
-const dummyNews = [
-  {
-    id: 1,
-    title: 'New trainees arrive in Tokyo',
-    summary: 'We welcomed new trainees from Vietnam and Indonesia this week.',
-    image: 'http://toyo-coop.jp/tcsweb/wp-content/uploads/2022/09/g-03.png',
-    date: 'July 5, 2025',
-  },
-  {
-    id: 2,
-    title: 'Seminar on Specific Skill Visa',
-    summary: 'A seminar was held regarding the requirements and updates on the Specific Skill Visa.',
-    image: 'https://via.placeholder.com/600x400?text=News+2',
-    date: 'June 28, 2025',
-  },
-  {
-    id: 3,
-    title: 'Annual General Meeting 2025',
-    summary: 'The 2025 AGM was successfully held at our headquarters with key stakeholders.',
-    image: 'https://via.placeholder.com/600x400?text=News+3',
-    date: 'June 15, 2025',
-  },
-];
-
 export default function News() {
+  const { language } = useLanguage();
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      const col = language === 'en' ? 'news' : 'newsjp';
+      const snap = await getDocs(collection(db, col));
+      const items = [];
+      snap.forEach((doc) => {
+        items.push({ id: doc.id, ...doc.data() });
+      });
+      items.sort((a, b) => b.date?.seconds - a.date?.seconds); // sort by newest
+      setArticles(items);
+      setLoading(false);
+    };
+
+    fetchNews();
+  }, [language]);
+
   return (
-    <Container fluid className="py-5">
+    <Container className="py-5 bg-white">
       {/* Header */}
-      <div className="about-head">
-        <h1 className="text-white text-center fw-bold">News</h1>
-      </div>
+      <Row className="about-head">
+        <h1 className="text-white text-center fw-bold">{language === 'en' ? 'News' : 'ニュース'}</h1>
+      </Row>
 
       {/* News List */}
       <Container className="my-5">
-        <Row className="g-4">
-          {dummyNews.map((news) => (
-            <Col md={4} key={news.id}>
-              <Card className="h-100 shadow-sm border-0">
-                <Card.Img variant="top" src={news.image} />
-                <Card.Body>
-                  <Card.Title>{news.title}</Card.Title>
-                  <Card.Text className="text-muted" style={{ fontSize: '0.9rem' }}>{news.date}</Card.Text>
-                  <Card.Text>{news.summary}</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+        {loading ? (
+          <p className="text-center">Loading...</p>
+        ) : (
+          <Row className="g-4">
+            {articles.map((news) => (
+              <Col md={4} key={news.id}>
+                <Card className="h-100 shadow-sm border-0">
+                  <Card.Img variant="top" src={news.image} />
+                  <Card.Body>
+                    <Card.Title>{news.title}</Card.Title>
+                    <Card.Text className="text-muted" style={{ fontSize: '0.9rem' }}>
+                      {new Date(news.date.seconds * 1000).toLocaleDateString()}
+                    </Card.Text>
+                    <Card.Text>{news.summary}</Card.Text>
+                    <Button variant="link" onClick={() => navigate(`/news/${news.id}`)}>
+                      {language === 'en' ? 'Read more' : '続きを読む'}
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        )}
       </Container>
 
       {/* Contact Section */}

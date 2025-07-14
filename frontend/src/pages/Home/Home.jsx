@@ -4,7 +4,7 @@ import './Home.css';
 
 export default function Home() {
     return (
-        <Container>
+        <Container className="home-head py-5 bg-white">
             <Row className="justify-content-center">
                 {/* Slide */}
                 <section>

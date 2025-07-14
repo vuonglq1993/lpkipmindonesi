@@ -1,35 +1,99 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import AdminDashboard from "./pages/AdminDashboard";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import OurRoleEditor from "./pages/OurRoleEditor";
+import OurThoughtsEditor from "./pages/OurThoughtsEditor";
+import ComparisonTableEditor from "./pages/ComparisonTableEditor";
+import SkillSystemEditor from "./pages/SkillSystemEditor";
+import TechnicalInternEditor from "./pages/TechnicalInternEditor";
+import OverviewEditor from "./pages/UnionOverviewEditor";
+import NewsEditor from "./pages/AdminNewsEditor";
+import AdminContact from "./pages/AdminContact";
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <AuthProvider>
+      <BrowserRouter>
 
-export default App
+        <Routes>
+          <Route path="/login" element={<Login />} />
+
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/contact"
+            element={
+              <ProtectedRoute>
+                <AdminContact />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/our-role"
+            element={
+              <ProtectedRoute>
+                <OurRoleEditor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/our-thoughts"
+            element={
+              <ProtectedRoute>
+                <OurThoughtsEditor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/skill-system"
+            element={
+              <ProtectedRoute>
+                <SkillSystemEditor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/technical-intern"
+            element={
+              <ProtectedRoute>
+                <TechnicalInternEditor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/overview"
+            element={
+              <ProtectedRoute>
+                <OverviewEditor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/news"
+            element={
+              <ProtectedRoute>
+                <NewsEditor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/comparison-table"
+            element={
+              <ProtectedRoute>
+                <ComparisonTableEditor />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}

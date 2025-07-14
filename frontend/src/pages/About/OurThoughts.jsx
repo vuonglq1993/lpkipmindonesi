@@ -1,77 +1,111 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import './About.css';
+import React, { useEffect, useState } from 'react';
+import { db } from '../../firebase/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import { Row, Col, Container } from 'react-bootstrap';
 import ContactSection from '../../components/contact';
+import { Helmet } from 'react-helmet';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function OurThoughts() {
-    return (
-        <Container  className="py-5">
+    const { language } = useLanguage();
+    const [sections, setSections] = useState({});
+    const [loading, setLoading] = useState(true);
 
-            {/* Section Header */}
+    useEffect(() => {
+        const fetchData = async () => {
+            const colName = language === 'en' ? 'ourThoughts' : 'ourThoughtsjp';
+            const querySnapshot = await getDocs(collection(db, colName));
+            const data = {};
+            querySnapshot.forEach((doc) => {
+                data[doc.id] = doc.data();
+            });
+            setSections(data);
+            setLoading(false);
+        };
+
+        fetchData();
+    }, [language]);
+
+    const renderSection = (sections) => (
+        <>
+            {/* Section t01 */}
+            {sections.t01 && (
+                <Row className="justify-content-center">
+                    <Col md={12}>
+                        <Row className="justify-content-center">
+                            <Col xs={10}>
+                                <img
+                                    src={sections.t01.img}
+                                    className="passion-img img-fluid"
+                                    alt="Main Visual"
+                                />
+                            </Col>
+                        </Row>
+                        <Row className="mt-5 passion-text">
+                            <p className="fs-1 text-center text-black">{sections.t01.text1}</p>
+                            <p className="fs-1 text-center text-black">{sections.t01.text2}</p>
+                        </Row>
+                    </Col>
+                </Row>
+            )}
+
+            {/* Section t02 */}
+            {sections.t02 && (
+                <Row className="mt-4 justify-content-center">
+                    <Col xs={10} md={8}>
+                        <img
+                            src={sections.t02.img}
+                            className="img-fluid"
+                            alt="Quote Visual"
+                        />
+                    </Col>
+                </Row>
+            )}
+
+            {/* Section t03 */}
+            {sections.t03 && (
+                <Row className="PA-04">
+                    <Col>
+                        <h1>{sections.t03.bigtext}</h1>
+                        {sections.t03.text1 && <p className="fs-3">{sections.t03.text1}</p>}
+                        {sections.t03.text2 && <p className="fs-3">{sections.t03.text2}</p>}
+                        {sections.t03.text3 && <p className="fs-3">{sections.t03.text3}</p>}
+                        {sections.t03.text4 && <p className="fs-3">{sections.t03.text4}</p>}
+                    </Col>
+                </Row>
+            )}
+
+            {/* Section t04 */}
+            {sections.t04 && (
+                <Row className="PA-05">
+                    <Col>
+                        <h1 className="mb-5">{sections.t04.bigtext}</h1>
+                        {sections.t04.boldtext1 && <p className="fs-3 fw-bold">{sections.t04.boldtext1}</p>}
+                        {sections.t04.boldtext2 && <p className="fs-3 fw-bold">{sections.t04.boldtext2}</p>}
+                        {sections.t04.smalltext && <p className="fs-6">{sections.t04.smalltext}</p>}
+                        {sections.t04.text1 && <p className="fs-3">{sections.t04.text1}</p>}
+                        {sections.t04.text2 && <p className="fs-3">{sections.t04.text2}</p>}
+                        {sections.t04.text3 && <p className="fs-3">{sections.t04.text3}</p>}
+                    </Col>
+                </Row>
+            )}
+        </>
+    );
+
+    return (
+        <Container className="py-5 bg-white">
+            <Helmet>
+                <title>Our Thoughts - {language === 'en' ? 'English' : 'Japanese'}</title>
+                <meta name="description" content="Company beliefs and philosophies" />
+            </Helmet>
+
             <Row className="about-head">
                 <p className="text-center fs-1 mb-5">Our Thoughts</p>
             </Row>
 
-            {/* Hero Image + Caption */}
-            <Row className="justify-content-center">
-                <Col md={12}>
-                    <Row className="justify-content-center">
-                        <Col xs={10}>
-                            <img
-                                src="https://i.postimg.cc/LXGwCWh8/temp-Image-GXxgzn.avif"
-                                className="passion-img img-fluid"
-                                alt="Main Visual"
-                            />
-                        </Col>
-                    </Row>
-                    <Row className="mt-5 passion-text">
-                        <p className="fs-1 text-center text-black">
-                            Success doesn't depend on ability or experience.<br />
-                            It's all about passion.
-                        </p>
-                    </Row>
-                </Col>
-            </Row>
+            {loading ? <p className="text-center">Loading...</p> : renderSection(sections)}
 
-            {/* Secondary Image */}
-            <Row className="mt-4 justify-content-center">
-                <Col xs={10} md={8}>
-                    <img
-                        src="https://i.postimg.cc/66RbSfrY/temp-Image9-YBb6k.avif"
-                        className="img-fluid"
-                        alt="Quote Visual"
-                    />
-                </Col>
-            </Row>
-
-            {/* Section PA-04 */}
-            <Row className="PA-04">
-                <Col>
-                    <h1>All you need is PASSION</h1>
-                    <p className="fs-3">What moves people's hearts in any era</p>
-                    <p className="fs-3">is not some clever technique or sweet word.</p>
-                    <p className="fs-3">It is always a burning passion accompanied by sincere words and actions that</p>
-                    <p className="fs-3">moves people's hearts and opens the way to mutual understanding.</p>
-                </Col>
-            </Row>
-
-            {/* Section PA-05 */}
-            <Row className="PA-05">
-                <Col>
-                    <h1>PASSION on the work</h1>
-                    <p className="fs-3 fw-bold mt-5">Live as if you were to die tomorrow,</p>
-                    <p className="fs-3 fw-bold">learn as if you were to live forever</p>
-                    <p className="fs-6">(Indian independence leader: Mahatma Gandhi)</p>
-
-                    <p className="fs-3">This is one of the messages sent by the union to the trainees, who are expected to have a clear resolve and self-discipline.</p>
-                    <p className="fs-3">A half-hearted trainee who is not prepared will not be tolerated.</p>
-                    <p className="fs-3">That is why it is necessary to be enthusiastic and take the trainees seriously.</p>
-                </Col>
-            </Row>
-
-            {/* Section contact */}
             <ContactSection />
-
         </Container>
     );
 }
