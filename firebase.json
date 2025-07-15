@@ -5,22 +5,9 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  "functions": [
-    {
-      "source": "functions",
-      "codebase": "default",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log",
-        "*.local"
-      ],
-      "predeploy": []
-    }
-  ],
+
   "hosting": {
-    "public": "frontend/build",
+    "public": "firebase-hosting",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -28,12 +15,13 @@
     ],
     "rewrites": [
       {
+        "source": "/admin/**",
+        "destination": "/admin/index.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
     ]
-  },
-  "storage": {
-    "rules": "storage.rules"
   }
 }
