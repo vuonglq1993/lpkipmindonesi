@@ -118,8 +118,10 @@ export default function OurStrength() {
 
             {/* Section st07 */}
             {sections.st07 && (
-                <Row className="st-07">
+                <Row className="st-07 justify-content-center">
+
                     {[1, 2, 3, 4].map((i) => (
+                        
                         <Col md={5} key={i}>
                             <img src={sections.st07[`img${i}`]} className="img-fluid" alt="" />
                         </Col>
