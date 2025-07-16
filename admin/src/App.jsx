@@ -11,6 +11,7 @@ import TechnicalInternEditor from "./pages/TechnicalInternEditor";
 import OverviewEditor from "./pages/UnionOverviewEditor";
 import NewsEditor from "./pages/AdminNewsEditor";
 import AdminContact from "./pages/AdminContact";
+import HomeEditor from "./pages/HomeEditor";
 export default function App() {
   return (
     <AuthProvider>
@@ -24,6 +25,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/home"
+            element={
+              <ProtectedRoute>
+                <HomeEditor />
               </ProtectedRoute>
             }
           />

@@ -3,6 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { db } from '../../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useLanguage } from '../../context/LanguageContext';
+import { Link } from "react-router-dom";
+
 import './Home.css';
 
 export default function Home() {
@@ -86,13 +88,13 @@ export default function Home() {
                 {/* H03 */}
                 <Row className="py-5 justify-content-center my-5">
                     <Col md={3}>
-                        <img src={content.h03.img1} className="img-fluid" alt="" />
+                    <Link to="/mind" className="text-white text-decoration-none"><img src={content.h03.img1} className="img-fluid" alt="" /></Link>
                     </Col>
                     <Col md={3}>
-                        <img src={content.h03.img2} className="img-fluid" alt="" />
+                    <Link to="/strength" className="text-white text-decoration-none"><img src={content.h03.img2} className="img-fluid" alt="" /></Link>
                     </Col>
                     <Col md={3}>
-                        <img src={content.h03.img3} className="img-fluid" alt="" />
+                    <Link to="/mission" className="text-white text-decoration-none"><img src={content.h03.img3} className="img-fluid" alt="" /></Link>
                     </Col>
                 </Row>
 
@@ -105,10 +107,10 @@ export default function Home() {
                 {/* H05 */}
                 <Row className="h05 text-white justify-content-center">
                     <Col md={5} className="text-end">
-                        <img src={content.h05.img1} className="img-fluid" alt="" />
+                    <Link to="/regulation" className="text-white text-decoration-none">   <img src={content.h05.img1} className="img-fluid" alt="" /></Link>
                     </Col>
                     <Col md={5}>
-                        <img src={content.h05.img2} className="img-fluid" alt="" />
+                    <Link to="/skills" className="text-white text-decoration-none"><img src={content.h05.img2} className="img-fluid" alt="" /></Link>   
                     </Col>
                 </Row>
 

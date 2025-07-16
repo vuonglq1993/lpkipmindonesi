@@ -26,7 +26,10 @@ export default function AdminDashboard() {
             <h4>🔧 Quản lý nội dung:</h4>
             <ul className="list-group mt-3">
             <li className="list-group-item">
-                    <Link to="/admin/contact"> Các thông bóa mới </Link>
+                    <Link to="/admin/contact"> Các thông báo mới </Link>
+                </li>
+                <li className="list-group-item">
+                    <Link to="/admin/home">📝 Chỉnh sửa trang "Home"</Link>
                 </li>
                 <li className="list-group-item">
                     <Link to="/admin/our-role">📝 Chỉnh sửa trang "Our Role"</Link>
