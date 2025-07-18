@@ -139,7 +139,7 @@ export default function OurStrength() {
             </Helmet>
 
             <Row className="about-head">
-                <p className="text-center fs-1 mb-5">Our Strength</p>
+            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Our Strengths' : '私たちの強み'}</h1>
             </Row>
 
             {loading ? <p className="text-center">Loading...</p> : renderSection(sections)}

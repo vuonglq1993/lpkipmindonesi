@@ -54,7 +54,7 @@ export default function SpecificSkillSystem() {
             </Helmet>
 
             <Row className="about-head">
-                <p className="text-center fs-1 mb-5">Specific Skill System</p>
+            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Specific skill system' : '特定技能制度'}</h1>
             </Row>
 
             {loading ? (

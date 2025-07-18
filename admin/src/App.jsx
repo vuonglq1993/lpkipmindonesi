@@ -12,6 +12,7 @@ import OverviewEditor from "./pages/UnionOverviewEditor";
 import NewsEditor from "./pages/AdminNewsEditor";
 import AdminContact from "./pages/AdminContact";
 import HomeEditor from "./pages/HomeEditor";
+import ContactEditor from "./pages/ContactComponentEditor";
 export default function App() {
   return (
     <AuthProvider>
@@ -73,6 +74,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <TechnicalInternEditor />
+              </ProtectedRoute>
+            }
+          />
+                    <Route
+            path="/admin/contactedit"
+            element={
+              <ProtectedRoute>
+                <ContactEditor />
               </ProtectedRoute>
             }
           />

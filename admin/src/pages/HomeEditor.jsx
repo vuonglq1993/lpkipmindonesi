@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase/firebase';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
-import { Container, Row, Col, Button, Form, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form, Alert, InputGroup } from 'react-bootstrap';
 
 export default function HomeEditor() {
     const [dataEn, setDataEn] = useState({});
     const [dataJp, setDataJp] = useState({});
     const [loading, setLoading] = useState(true);
     const [successMsg, setSuccessMsg] = useState('');
+    const [newFields, setNewFields] = useState({}); // temp input for adding field
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,6 +40,42 @@ export default function HomeEditor() {
         });
     };
 
+    const handleDeleteField = (lang, sectionId, field) => {
+        const setter = lang === 'en' ? setDataEn : setDataJp;
+        const current = lang === 'en' ? dataEn : dataJp;
+
+        const updatedSection = { ...current[sectionId] };
+        delete updatedSection[field];
+
+        setter({
+            ...current,
+            [sectionId]: updatedSection
+        });
+    };
+
+    const handleAddField = (lang, sectionId) => {
+        const { key, value } = newFields[`${lang}-${sectionId}`] || {};
+        if (!key) return;
+
+        const setter = lang === 'en' ? setDataEn : setDataJp;
+        const current = lang === 'en' ? dataEn : dataJp;
+
+        const updatedSection = {
+            ...current[sectionId],
+            [key]: value || ''
+        };
+
+        setter({
+            ...current,
+            [sectionId]: updatedSection
+        });
+
+        setNewFields((prev) => ({
+            ...prev,
+            [`${lang}-${sectionId}`]: { key: '', value: '' }
+        }));
+    };
+
     const handleSave = async () => {
         try {
             const save = async (data, col) => {
@@ -63,23 +100,69 @@ export default function HomeEditor() {
             <h3>{label}</h3>
             {Object.keys(data).map((sectionId) => {
                 const section = data[sectionId];
+                const fieldKey = `${lang}-${sectionId}`;
+                const newField = newFields[fieldKey] || { key: '', value: '' };
+
                 return (
                     <div key={sectionId} className="bg-light p-3 my-3 border rounded">
                         <h5 className="mb-3">Section: {sectionId}</h5>
+
                         {Object.entries(section).map(([key, value]) => {
                             if (key === 'id') return null;
                             return (
                                 <Form.Group className="mb-3" key={key}>
                                     <Form.Label>{key}</Form.Label>
-                                    <Form.Control
-                                        as={typeof value === 'string' && value.length > 50 ? 'textarea' : 'input'}
-                                        rows={3}
-                                        value={value}
-                                        onChange={(e) => handleChange(lang, sectionId, key, e.target.value)}
-                                    />
+                                    <div className="d-flex gap-2">
+                                        <Form.Control
+                                            as={typeof value === 'string' && value.length > 50 ? 'textarea' : 'input'}
+                                            rows={3}
+                                            value={value}
+                                            onChange={(e) => handleChange(lang, sectionId, key, e.target.value)}
+                                        />
+                                        <Button
+                                            variant="danger"
+                                            size="sm"
+                                            onClick={() => handleDeleteField(lang, sectionId, key)}
+                                        >
+                                            ❌
+                                        </Button>
+                                    </div>
                                 </Form.Group>
                             );
                         })}
+
+                        {/* Add new field */}
+                        <Form.Group className="mb-3">
+                            <Form.Label className="fw-bold">➕ Add Field</Form.Label>
+                            <InputGroup className="mb-2">
+                                <Form.Control
+                                    placeholder="Field name (e.g. title1)"
+                                    value={newField.key}
+                                    onChange={(e) =>
+                                        setNewFields((prev) => ({
+                                            ...prev,
+                                            [fieldKey]: { ...newField, key: e.target.value }
+                                        }))
+                                    }
+                                />
+                                <Form.Control
+                                    placeholder="Value"
+                                    value={newField.value}
+                                    onChange={(e) =>
+                                        setNewFields((prev) => ({
+                                            ...prev,
+                                            [fieldKey]: { ...newField, value: e.target.value }
+                                        }))
+                                    }
+                                />
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => handleAddField(lang, sectionId)}
+                                >
+                                    ➕
+                                </Button>
+                            </InputGroup>
+                        </Form.Group>
                     </div>
                 );
             })}

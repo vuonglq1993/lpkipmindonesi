@@ -50,7 +50,7 @@ export default function TechnicalInternTraining() {
             </Helmet>
 
             <Row className="system-head">
-                <p className="text-center fs-1 mb-5">Technical Intern Training Program</p>
+            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Technical Intern Training Program' : '技能実習制度'}</h1>
             </Row>
 
             {/* Section ti01 */}

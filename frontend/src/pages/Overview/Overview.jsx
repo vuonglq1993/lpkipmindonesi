@@ -43,7 +43,7 @@ export default function Overview() {
         <Container className="py-5 bg-white">
             {/* Section Header */}
             <Row className="about-head">
-                <p className="text-center fs-1 mb-5">Union Overview</p>
+            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Union Overviews' : '組合概要'}</h1>
             </Row>
 
             {/* Section Table */}

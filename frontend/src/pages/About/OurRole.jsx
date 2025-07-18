@@ -123,7 +123,7 @@ export default function OurRole() {
             <Container className="py-5 bg-white">
                 {/* Header */}
                 <Row className="about-head">
-                    <p className="text-center fs-1 mb-5">Our Role</p>
+                <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Our Role' : '私たちの役割'}</h1>
                 </Row>
 
                 {loading ? (

@@ -100,7 +100,7 @@ export default function OurThoughts() {
             </Helmet>
 
             <Row className="about-head">
-                <p className="text-center fs-1 mb-5">Our Thoughts</p>
+            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Our Thoughts' : '私たちの想い'}</h1>
             </Row>
 
             {loading ? <p className="text-center">Loading...</p> : renderSection(sections)}

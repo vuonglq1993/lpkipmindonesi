@@ -26,7 +26,9 @@ export default function NavigationBar() {
   const isActive = (path) => location.pathname === path ? 'fw-bold text-primary' : '';
 
   return (
-    <Navbar key="lg" expand="lg" fixed="top" bg="light" className="shadow-sm">
+        <Navbar key="lg" expand="lg" className="mb-3">
+
+
       <Container className="bg-white">
         <Navbar.Brand as={Link} to="/" className="fw-bold d-flex align-items-center py-2">
           <img src={logo} alt="Logo" style={{ height: '36px', maxHeight: '5vh' }} className="me-2" />
@@ -85,3 +87,4 @@ export default function NavigationBar() {
     </Navbar>
   );
 }
+

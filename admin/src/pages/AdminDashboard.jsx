@@ -47,6 +47,9 @@ export default function AdminDashboard() {
                     <Link to="/admin/news">📝 Thêm, sửa news</Link>
                 </li>
                 <li className="list-group-item">
+                    <Link to="/admin/contactedit">📝 Chỉnh sửa component Contact</Link>
+                </li>
+                <li className="list-group-item">
                     <Link to="/admin/overview">📝 Chỉnh sửa bảng UnionOverview</Link>
                 </li>
                 <li className="list-group-item">

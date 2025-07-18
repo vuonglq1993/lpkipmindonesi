@@ -33,7 +33,7 @@ export default function News() {
     <Container className="py-5 bg-white">
       {/* Header */}
       <Row className="about-head">
-        <h1 className="text-white text-center fw-bold">{language === 'en' ? 'News' : 'ニュース'}</h1>
+        <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'News' : 'ニュース'}</h1>
       </Row>
 
       {/* News List */}
