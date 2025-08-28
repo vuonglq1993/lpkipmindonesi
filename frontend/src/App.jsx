@@ -11,7 +11,9 @@ import SpeccificSkillSystem from "./pages/System/SpecificSkillSystem";
 import Overview from "./pages/Overview/Overview";
 import Contact from "./pages/Contact/Contact";
 import News from "./pages/News/News";
+import Recruitment from "./pages/Recruitment/Recruitment";
 import NewsDetail from "./pages/News/NewsDetails";
+import RecruitmentDetail from "./pages/Recruitment/RecruitmentDetails";
 import Footer from "./components/footer";
 
 import './App.css';
@@ -36,6 +38,10 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/news" element={<News />} />
                 <Route path="/news/:id" element={<NewsDetail />} />
+                <Route path="/recruitment" element={<Recruitment />} />
+                <Route path="/recruitment/:id" element={<RecruitmentDetail />} />
+
+
                 {/* <Route path="/contact" element={<Contact />} /> */}
               </Routes>
             </main>

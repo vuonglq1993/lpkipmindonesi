@@ -1,0 +1,36 @@
+.toolbar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  
+  .toolbar button {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .toolbar button.is-active {
+    background: #0d6efd;
+    color: white;
+    border-color: #0d6efd;
+  }
+  
+  .ProseMirror {
+    white-space: pre-wrap;
+    min-height: 200px;
+    outline: none;
+  }
+  
+
+  .tiptap-editor-wrapper img,
+  .rendered-article img {
+    display: block;
+    margin: 1rem auto;
+    max-width: 100%;
+    height: auto;
+  }
+  

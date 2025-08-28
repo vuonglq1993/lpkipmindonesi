@@ -41,32 +41,19 @@ export default function Home() {
     if (!content) return null;
 
     return (
-        <Container className="home-head py-5 bg-white">
+        <Container className="home-head pt-5 bg-white">
             <Row className="justify-content-center">
                 {/* Slide */}
-                <section>
-                    <div id="carouselExampleFade" className="carousel slide carousel-fade">
-                        <div className="carousel-inner">
-                            <div className="carousel-item active">
-                                <img src={content.banner.img1} className="d-block w-100" alt="Slide 1" />
-                            </div>
-                            <div className="carousel-item">
-                                <img src={content.banner.img2} className="d-block w-100" alt="Slide 2" />
-                            </div>
-                            <div className="carousel-item">
-                                <img src={content.banner.img3} className="d-block w-100" alt="Slide 3" />
-                            </div>
-                        </div>
-                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span className="visually-hidden">Previous</span>
-                        </button>
-                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span className="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </section>
+                <div className="banner">
+                    <Container>
+                        <Col sm={6}>
+                            <p className="fs-1 fw-bold ms-4 text-white">{content.banner.title}</p>
+                            <p className="fs-4 ms-4 text-black">{content.banner.description}</p>
+
+                        </Col>
+                    </Container>
+
+                </div>
 
                 {/* H01 */}
                 <Row className="py-5 text-center justify-content-center">
@@ -79,60 +66,147 @@ export default function Home() {
                     </Col>
                 </Row>
 
-                {/* H02 */}
-                <Row className="text-center justify-content-center py-3 h02">
-                    <p className="fs-3 text-white">{content.h02.text1}</p>
-                    <p className="fs-2 text-white fw-bold">{content.h02.text2}</p>
-                </Row>
 
                 {/* H03 */}
-                <Row className="py-5 justify-content-center my-5">
-                    <Col md={3}>
-                    <Link to="/mind" className="text-white text-decoration-none"><img src={content.h03.img1} className="img-fluid" alt="" /></Link>
-                    </Col>
-                    <Col md={3}>
-                    <Link to="/strength" className="text-white text-decoration-none"><img src={content.h03.img2} className="img-fluid" alt="" /></Link>
-                    </Col>
-                    <Col md={3}>
-                    <Link to="/mission" className="text-white text-decoration-none"><img src={content.h03.img3} className="img-fluid" alt="" /></Link>
-                    </Col>
-                </Row>
-
-                {/* H04 */}
-                <Row className="h04 text-white text-center py-3">
-                    <p className="fs-3 text-white">{content.h04.text1}</p>
-                    <p className="fs-2 text-white fw-bold">{content.h04.text2}</p>
-                </Row>
+                <div className="h03 pt-5">
+                    <Row className="py-5 justify-content-center my-5">
+                        <Col sm={3}>
+                            <Link to="/mind" className="text-white text-decoration-none"><img src={content.h03.img1} className="img-fluid rounded shadow-lg" alt="" /></Link>
+                        </Col>
+                        <Col sm={3}>
+                            <Link to="/strength" className="text-white text-decoration-none"><img src={content.h03.img2} className="img-fluid rounded shadow-lg" alt="" /></Link>
+                        </Col>
+                        <Col sm={3}>
+                            <Link to="/mission" className="text-white text-decoration-none"><img src={content.h03.img3} className="img-fluid rounded shadow-lg" alt="" /></Link>
+                        </Col>
+                    </Row>
+                </div>
 
                 {/* H05 */}
-                <Row className="h05 text-white justify-content-center">
-                    <Col md={5} className="text-end">
-                    <Link to="/regulation" className="text-white text-decoration-none">   <img src={content.h05.img1} className="img-fluid" alt="" /></Link>
+                <Row className="h05 text-white justify-content-center mt-5 mb-5">
+                    <Col md={4} xs={10} className="text-start">
+                        <Row>
+                            <p className="fs-1 text-primary fw-bolder">{content.h05.lefttitle}</p>
+                        </Row>
+                        <Row className="mt-4">
+                            <Col xs={3}>
+                                <img src={content.h05.lefticon1} className="img-fluid border mt-3" alt="" />
+                            </Col>
+                            <Col xs={9}>
+                                <p className="fs-5 text-black fw-bold">{content.h05.leftsum1}</p>
+                                <p className="fs-6 text-black">{content.h05.leftdes1}</p>
+                            </Col>
+                        </Row>
+                        <Row className="mt-4">
+                            <Col xs={3}>
+                                <img src={content.h05.lefticon2} className="img-fluid border mt-3" alt="" />
+                            </Col>
+                            <Col xs={9}>
+                                <p className="fs-5 text-black fw-bold">{content.h05.leftsum2}</p>
+                                <p className="fs-6 text-black">{content.h05.leftdes2}</p>
+                            </Col>
+                        </Row>
+                        <Row className="mt-4">
+                            <Col xs={3}>
+                                <img src={content.h05.lefticon3} className="img-fluid border" alt="" />
+                            </Col>
+                            <Col xs={9}>
+                                <p className="fs-5 text-black fw-bold">{content.h05.leftsum3}</p>
+                                <p className="fs-6 text-black">{content.h05.leftdes3}</p>
+                            </Col>
+                        </Row>
                     </Col>
-                    <Col md={5}>
-                    <Link to="/skills" className="text-white text-decoration-none"><img src={content.h05.img2} className="img-fluid" alt="" /></Link>   
+                    <Col md={7}>
+                        <Row className="justify-content-center">
+                            <Col xs={10} className="text-center">
+                                <p className="fs-6 text-black text-start mx-5">{content.h05.rightdes}</p>
+                            </Col>
+                        </Row>
+
+                        <img src={content.h05.rightimg} className="img-fluid" alt="" />
+
                     </Col>
                 </Row>
-
-                {/* H06 */}
-                <Row className="h06 text-white text-center py-3">
-                    <p className="fs-3 text-white">{content.h06.text1}</p>
-                    <p className="fs-2 text-white fw-bold">{content.h06.text2}</p>
-                </Row>
-
                 {/* H07 */}
-                <Row className="h07 justify-content-center text-center py-5">
-                    <Col md={7} className="my-5">
-                        <iframe
-                            width="560"
-                            height="315"
-                            src={content.h07.link}
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                        ></iframe>
-                    </Col>
+                <Row className="h07 justify-content-center text-white pt-5">
+                <p className="fs-2 fw-bold text-white text-center mt-3 mb-5">{content.h07.title}</p>
+
+                    <Row className="justify-content-center text-white mb-1">
+                        <Col xs={6} className="bg-opacity-25 bg-white mx-1 ps-4 pe-5 pt-3">
+                            <Row>
+                                <p className="fs-5 fw-bold">{content.h07.col1title}</p>
+                            </Row>
+                            <Row>
+                                <Col xs={2}>
+                                    <img src={content.h07.col1icon} className="img-fluid border p-2" alt="" />
+
+                                </Col>
+                                <Col xs={10}>
+                                    <p className="fs-6 me-5 mt-3">{content.h07.col1des}</p>
+
+                                </Col>
+                            </Row>
+
+
+
+                        </Col>
+                        <Col xs={5} className="bg-opacity-25 bg-white ps-4 pt-3">
+                            <Row>
+                                <p className="fs-5 fw-bold">{content.h07.col2title}</p>
+                            </Row>
+                            <Row>
+                                <Col xs={2}>
+                                    <img src={content.h07.col2icon} className="img-fluid border p-2" alt="" />
+
+                                </Col>
+                                <Col xs={10}>
+                                    <p className="fs-6 me-4 mt-2">{content.h07.col2des}</p>
+
+                                </Col>
+                            </Row>
+
+
+
+                        </Col>
+                    </Row>
+                    <Row className="justify-content-center text-start">
+                        <Col xs={5} className="bg-opacity-25 bg-white mx-1 ps-4 pe-2 pt-3">
+                            <Row>
+                                <p className="fs-5 fw-bold">{content.h07.col3title}</p>
+                            </Row>
+                            <Row>
+                                <Col xs={2}>
+                                    <img src={content.h07.col3icon} className="img-fluid border p-2" alt="" />
+
+                                </Col>
+                                <Col xs={10}>
+                                    <p className="fs-6 me-4 mt-1">{content.h07.col3des}</p>
+
+                                </Col>
+                            </Row>
+
+
+
+                        </Col>
+                        <Col xs={6} className="bg-opacity-25 bg-white ps-4 pe-5 pt-3">
+                            <Row>
+                                <p className="fs-5 fw-bold">{content.h07.col4title}</p>
+                            </Row>
+                            <Row>
+                                <Col xs={2}>
+                                    <img src={content.h07.col4icon} className="img-fluid border p-3" alt="" />
+
+                                </Col>
+                                <Col xs={10}>
+                                    <p className="fs-6 me-4 mt-3">{content.h07.col4des}</p>
+
+                                </Col>
+                            </Row>
+
+
+
+                        </Col>
+                    </Row>
                 </Row>
             </Row>
         </Container>

@@ -10,7 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tiptap/extension-image": "^3.0.7",
+    "@tiptap/react": "^3.0.7",
+    "@tiptap/starter-kit": "^3.0.7",
     "bootstrap": "^5.3.7",
+    "dayjs": "^1.11.13",
     "firebase": "^11.10.0",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",

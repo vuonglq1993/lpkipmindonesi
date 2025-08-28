@@ -52,13 +52,6 @@ export default function OurThoughts() {
             {/* Section t02 */}
             {sections.t02 && (
                 <Row className="mt-4 justify-content-center">
-                    <Col xs={10} md={8}>
-                        <img
-                            src={sections.t02.img}
-                            className="img-fluid"
-                            alt="Quote Visual"
-                        />
-                    </Col>
                 </Row>
             )}
 

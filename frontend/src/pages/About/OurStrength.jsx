@@ -51,9 +51,6 @@ export default function OurStrength() {
 
             {/* Section st02 */}
             <Row className="mt-4 justify-content-center">
-                <Col xs={10} md={8}>
-                    <img src={sections.st02?.img} className="img-fluid" alt="" />
-                </Col>
             </Row>
 
             {/* Section st03 */}

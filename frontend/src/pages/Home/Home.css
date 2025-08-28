@@ -1,8 +1,18 @@
-.h02 {
-    background:
-        linear-gradient(45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%) right,
-        linear-gradient(-45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%)  left,
-        #0072c6;
+.banner {
+    background: url(https://i.postimg.cc/BQQty5dq/TRANG-CH-17.png) no-repeat;
+    background-size: cover;
+    min-height: 600px;
+    padding: 200px 0 200px 100px;
+}
+
+.banner .fs-1 {
+    text-shadow: 1px 1px 2px rgb(78, 115, 252);    
+}
+
+.h03 {
+    background: url(https://i.postimg.cc/v8Vh2xCS/TRANG-CH-02.png) no-repeat;
+    background-size: cover;
+    min-height: 200px;
 }
 .home-head{
     margin-top: -70px;
@@ -15,17 +25,20 @@
     #006837;
 }
 
-.h05 {
-    background: url(https://i.postimg.cc/k4VVtWC4/s-back.jpg) no-repeat;
-    background-size: cover;
-    color: white;
-    min-height: 400px;
-    padding: 200px 0 200px 100px;
-  }
+.h05 .border, .h07 .border{
+    border-radius: 50%;
+}
 
   .h06{
     background:
     linear-gradient(45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%) right,
     linear-gradient(-45deg, #2e2e2e 0%, #2e2e2e 7%, transparent 7%)  left,
     #b70000;
+}
+
+.h07 {
+    background: url(https://i.postimg.cc/sfLDSyQz/TRANG-CH-03.png) no-repeat;
+    background-size: cover;
+    min-height: 600px;
+    padding: 100px 0 100px 100px;
 }

@@ -56,12 +56,8 @@ export default function OurRole() {
             {/* r02 + r03 */}
             {sections.r02 && (
                 <>
-                    <Row className="mt-4 justify-content-center text-center">
-                        <Col xs={10} md={8}>
-                            {sections.r02.img && (
-                                <img src={sections.r02.img} className="img-fluid" alt="" />
-                            )}
-                        </Col>
+                    <Row className="mt-4 p-5 justify-content-center text-center">
+
                     </Row>
 
                     <Row className="ms-02 text-center">

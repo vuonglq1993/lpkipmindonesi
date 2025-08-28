@@ -4,9 +4,8 @@ import { db } from '../../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useLanguage } from '../../context/LanguageContext';
-import ContactSection from '../../components/contact';
 
-export default function NewsDetail() {
+export default function RecruitmentDetail() {
     const { id } = useParams();
     const { language } = useLanguage();
     const [article, setArticle] = useState(null);
@@ -14,7 +13,7 @@ export default function NewsDetail() {
 
     useEffect(() => {
         const fetchArticle = async () => {
-            const col = language === 'en' ? 'news' : 'newsjp';
+            const col = language === 'en' ? 'recruitment' : 'recruitmentjp';
             const docRef = doc(db, col, id);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
@@ -32,22 +31,18 @@ export default function NewsDetail() {
             ) : article ? (
                 <>
                     <Row className="about-head">
-                        <h1 className="text-white text-center fw-bold">{language === 'en' ? 'News' : 'ニュース'}</h1>
+                        <h1 className="text-white text-center fw-bold">{language === 'en' ? 'recruitment' : '募集'}</h1>
                     </Row>
-                    <Row className="mb-4 bg-light">
-                        <Col md={12}>
-                            <h1>{article.title}</h1>
-                            <p className="text-muted">
-                                {new Date(article.date.seconds * 1000).toLocaleDateString()}
-                            </p>
+                    <Row className="mb-4 bg-light justify-content-center">
+                        <Col xs={10}>
+                            <h1>{article.name}</h1>
                             {article.image && (
-                                <img src={article.image} alt={article.title} className="img-fluid my-4" />
+                                <img src={article.image} alt={article.name} className="img-fluid my-4" />
                             )}
-                            <div className="rendered-article"  dangerouslySetInnerHTML ={{ __html: article.content }} /> 
+                            <div className="rendered-article"  dangerouslySetInnerHTML ={{ __html: article.description }} /> 
 
                         </Col>
                     </Row>
-                    <ContactSection />
                 </>
             ) : (
                 <p className="text-center">Article not found.</p>

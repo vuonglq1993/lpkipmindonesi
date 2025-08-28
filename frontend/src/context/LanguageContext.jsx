@@ -3,13 +3,13 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-    const [language, setLanguage] = useState("en");
+
+    const [language, setLanguage] = useState(null); 
 
     useEffect(() => {
         const storedLang = localStorage.getItem("lang");
-        if (storedLang) setLanguage(storedLang);
+        setLanguage(storedLang || "jp"); 
     }, []);
-
     const changeLanguage = (lang) => {
         setLanguage(lang);
         localStorage.setItem("lang", lang);

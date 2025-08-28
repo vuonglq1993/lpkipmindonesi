@@ -9,9 +9,13 @@ import ComparisonTableEditor from "./pages/ComparisonTableEditor";
 import SkillSystemEditor from "./pages/SkillSystemEditor";
 import TechnicalInternEditor from "./pages/TechnicalInternEditor";
 import OverviewEditor from "./pages/UnionOverviewEditor";
-import NewsEditor from "./pages/AdminNewsEditor";
 import AdminContact from "./pages/AdminContact";
 import HomeEditor from "./pages/HomeEditor";
+import CreateNewsPage from "./pages/CreateNewsPage";
+import EditNewsPage from "./pages/EditNewsPage";
+import EditNewsById from "./pages/EditNewsById";
+import EditNewsPagejp from "./pages/EditNewsByIdJP";
+
 import ContactEditor from "./pages/ContactComponentEditor";
 export default function App() {
   return (
@@ -77,7 +81,7 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-                    <Route
+          <Route
             path="/admin/contactedit"
             element={
               <ProtectedRoute>
@@ -97,7 +101,32 @@ export default function App() {
             path="/admin/news"
             element={
               <ProtectedRoute>
-                <NewsEditor />
+                <EditNewsPage />
+              </ProtectedRoute>
+            }
+          />
+                    <Route
+            path="/admin/news/:id"
+            element={
+              <ProtectedRoute>
+                <EditNewsById />
+              </ProtectedRoute>
+            }
+          />
+                              <Route
+            path="/admin/newsjp/:id"
+            element={
+              <ProtectedRoute>
+                <EditNewsPagejp />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/create"
+            element={
+              <ProtectedRoute>
+                <CreateNewsPage />
               </ProtectedRoute>
             }
           />

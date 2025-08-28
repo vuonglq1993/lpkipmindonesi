@@ -73,8 +73,8 @@ export default function NavigationBar() {
                 {labels.news}
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/contact" className={`me-3 ${isActive('/contact')}`}>
-                {labels.contact}
+              <Nav.Link as={Link} to="/recruitment" className={`me-3 ${isActive('/recruitment')}`}>
+                {labels.recruitment}
               </Nav.Link>
 
               <div className="d-flex align-items-center ms-3">
