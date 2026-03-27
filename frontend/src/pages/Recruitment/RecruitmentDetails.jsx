@@ -4,6 +4,7 @@ import { db } from '../../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useLanguage } from '../../context/LanguageContext';
+import './Recruitment.css';
 
 export default function RecruitmentDetail() {
     const { id } = useParams();
@@ -11,6 +12,20 @@ export default function RecruitmentDetail() {
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        const handleContextMenu = (e) => {
+          if (e.target.tagName === "IMG") {
+            e.preventDefault();
+          }
+        };
+      
+        document.addEventListener("contextmenu", handleContextMenu);
+      
+        return () => {
+          document.removeEventListener("contextmenu", handleContextMenu);
+        };
+      }, []);
+      
     useEffect(() => {
         const fetchArticle = async () => {
             const col = language === 'en' ? 'recruitment' : 'recruitmentjp';
@@ -25,13 +40,13 @@ export default function RecruitmentDetail() {
     }, [id, language]);
 
     return (
-        <Container className="py-5 bg-white">
+        <Container className="pt-0 pb-5 bg-white">
             {loading ? (
                 <p className="text-center">Loading...</p>
             ) : article ? (
                 <>
-                    <Row className="about-head">
-                        <h1 className="text-white text-center fw-bold">{language === 'en' ? 'recruitment' : '募集'}</h1>
+                    <Row className="recruitment-head">
+                        <p className="text-white text-center fw-bold fs-1">{language === 'en' ? 'Recruitment' : '募集'}</p>
                     </Row>
                     <Row className="mb-4 bg-light justify-content-center">
                         <Col xs={10}>

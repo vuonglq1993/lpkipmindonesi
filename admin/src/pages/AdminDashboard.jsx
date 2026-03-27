@@ -29,35 +29,15 @@ export default function AdminDashboard() {
                     <Link to="/admin/contact"> Các thông báo mới </Link>
                 </li>
                 <li className="list-group-item">
-                    <Link to="/admin/home">📝 Chỉnh sửa trang "Home"</Link>
-                </li>
+                    <Link to="/admin/editrecruitment">💼 Quản lý Tuyển dụng</Link>
+                    </li>
                 <li className="list-group-item">
-                    <Link to="/admin/our-role">📝 Chỉnh sửa trang "Our Role"</Link>
-                </li>
-                <li className="list-group-item">
-                    <Link to="/admin/our-thoughts">📝 Chỉnh sửa trang "Our Thoughts"</Link>
-                </li>
-                <li className="list-group-item">
-                    <Link to="/admin/skill-system">📝 Chỉnh sửa trang "Skill system</Link>
-                </li>
-                <li className="list-group-item">
-                    <Link to="/admin/technical-intern">📝 Chỉnh sửa trang "Technical Intern"</Link>
-                </li>
-                <li className="list-group-item">
-                    <Link to="/admin/news">📝 Thêm, sửa news</Link>
-                </li>
-                <li className="list-group-item">
-                    <Link to="/admin/contactedit">📝 Chỉnh sửa component Contact</Link>
+                    <Link to="/admin/news">📰 Quản lý Tin tức</Link>
                 </li>
                 <li className="list-group-item">
                     <Link to="/admin/overview">📝 Chỉnh sửa bảng UnionOverview</Link>
                 </li>
-                <li className="list-group-item">
-                    <Link to="/admin/comparison-table">📝 Chỉnh sửa bảng ComparisonTable</Link>
-                </li>
-                <li className="list-group-item">
-                    <Link to="/admin/news">📰 Quản lý Tin tức</Link>
-                </li>
+
                 <li className="list-group-item">
                     <Link to="/admin/contact">📬 Xem phản hồi Liên hệ</Link>
                 </li>

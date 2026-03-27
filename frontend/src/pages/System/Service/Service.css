@@ -1,5 +1,5 @@
-.news-head {
-    background: url(https://i.postimg.cc/tCw9xr9D/head-title.jpg) no-repeat;
+.service-head {
+    background: url(https://res.cloudinary.com/du73nhdbv/image/upload/v1774585672/HEA-02_mng8nn.jpg) no-repeat;
     height: 210px;
     vertical-align: middle;
     font-weight: bold;
@@ -9,11 +9,5 @@
     background-size: cover;
     background-position: center;
     text-align: center;
-  }
-  
-  .rendered-article img {
-    display: block;
-    margin: 1rem auto;
-    max-width: 100%;
   }
   

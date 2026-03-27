@@ -14,6 +14,20 @@ export default function News() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const handleContextMenu = (e) => {
+      if (e.target.tagName === "IMG") {
+        e.preventDefault();
+      }
+    };
+  
+    document.addEventListener("contextmenu", handleContextMenu);
+  
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
+  
+  useEffect(() => {
     const fetchNews = async () => {
       const col = language === 'en' ? 'news' : 'newsjp';
       const snap = await getDocs(collection(db, col));
@@ -30,9 +44,9 @@ export default function News() {
   }, [language]);
 
   return (
-    <Container className="py-5 bg-white">
+    <Container fluid className=" bg-white">
       {/* Header */}
-      <Row className="about-head">
+      <Row className="news-head">
         <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'News' : 'ニュース'}</h1>
       </Row>
 

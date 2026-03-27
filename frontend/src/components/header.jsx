@@ -26,13 +26,13 @@ export default function NavigationBar() {
   const isActive = (path) => location.pathname === path ? 'fw-bold text-primary' : '';
 
   return (
-        <Navbar key="lg" expand="lg" className="mb-3">
+    <Navbar key="lg" expand="lg" className="mb-0">
 
 
-      <Container className="bg-white">
+      <Container fluid className="bg-white ps-2">
         <Navbar.Brand as={Link} to="/" className="fw-bold d-flex align-items-center py-2">
           <img src={logo} alt="Logo" style={{ height: '36px', maxHeight: '5vh' }} className="me-2" />
-          LPK IPM Indonesia
+          LPK IPM INDONESIA
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="offcanvasNavbar-expand-lg" />
@@ -44,16 +44,16 @@ export default function NavigationBar() {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3">
-              <NavDropdown title={labels.about || "About"} id="about-dropdown" className="me-3">
-                <NavDropdown.Item as={Link} to="/mind" className={isActive('/mind')}>
-                  {labels.thoughts}
-                </NavDropdown.Item>
+              <Nav.Link as={Link} to="/" className={`me-3 ${isActive('/')}`}>
+                {labels.home}
+              </Nav.Link>
+              <NavDropdown title={labels.about || "About"} id="about-dropdown" className="pe-3">
                 <NavDropdown.Item as={Link} to="/strength" className={isActive('/strength')}>
                   {labels.strength}
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/mission" className={isActive('/mission')}>
-                  {labels.mission}
-                </NavDropdown.Item>
+              <Nav.Link as={Link} to="/overview" className={`ms-2 ${isActive('/overview')}`}>
+                {labels.overview}
+              </Nav.Link>
               </NavDropdown>
 
               <NavDropdown title={labels.system || "System"} id="system-dropdown" className="me-3">
@@ -63,11 +63,17 @@ export default function NavigationBar() {
                 <NavDropdown.Item as={Link} to="/skills" className={isActive('/skills')}>
                   {labels.skill}
                 </NavDropdown.Item>
+
+                <NavDropdown title={labels.ourService || "Our Service"} id="our-service-dropdown" className="me-3, ms-2">
+                  {labels.ourServiceItems && labels.ourServiceItems.map((item, index) => (
+                    <NavDropdown.Item key={index} as={Link} to={`/our-service/${index}`}>
+                      {item}
+                    </NavDropdown.Item>
+                  ))}
+                </NavDropdown>
               </NavDropdown>
 
-              <Nav.Link as={Link} to="/overview" className={`me-3 ${isActive('/overview')}`}>
-                {labels.overview}
-              </Nav.Link>
+
 
               <Nav.Link as={Link} to="/news" className={`me-3 ${isActive('/news')}`}>
                 {labels.news}

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { db } from '../../firebase/firebase';
+import { db } from '../../../firebase/firebase';
 import { collection, getDocs } from 'firebase/firestore';
-import { Container, Row, Col, Table } from 'react-bootstrap';
-import ContactSection from '../../components/contact';
+import { Row, Container } from 'react-bootstrap';
+import ContactSection from '../../../components/contact';
 import { Helmet } from 'react-helmet';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../../context/LanguageContext';
+import './Service.css';
 
-export default function TechnicalInternTraining() {
+
+export default function DispatchofIndonesianTechnicalInternTrainees() {
     const { language } = useLanguage();
     const [sections, setSections] = useState({});
     const [loading, setLoading] = useState(true);
@@ -27,8 +29,9 @@ export default function TechnicalInternTraining() {
       
     useEffect(() => {
         const fetchData = async () => {
-            const contentCol = language === 'en' ? 'technicalItern' : 'technicalInternjp';
+            const contentCol = language === 'en' ? 'sv2en' : 'sv2jp';
 
+            // Load sections
             const contentSnap = await getDocs(collection(db, contentCol));
             const contentData = {};
             contentSnap.forEach((doc) => {
@@ -46,40 +49,31 @@ export default function TechnicalInternTraining() {
     return (
         <Container fluid className="px-0 s01">
             <Helmet>
-                <title>Technical Intern Training Program - {language === 'en' ? 'English' : 'Japanese'}</title>
-                <meta name="description" content="Technical Intern Training Program" />
+                <title>Dispatch of Indonesian Technical Intern Trainees - {language === 'en' ? 'English' : 'Japanese'}</title>
+                <meta name="description" content="Dispatch of Indonesian Technical Intern Trainees" />
             </Helmet>
 
-
+            <Row className="service-head">
+            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Dispatch of Indonesian Technical Intern Trainees' : 'インドネシア人技能実習生派遣'}</h1>
+            </Row>
             {loading ? (
                 <p className="text-center">Loading...</p>
             ) : (
                 <>
-                    {/* Section ti01 */}
-                    {sections.ti01 && (
-                        
-                            <img src={sections.ti01?.img} className="w-100" style={{ display: "block" }} alt="" />
-            
+                    {/* Section sv201 */}
+                    {sections.sv201 && (
+                        <>
+                        <img src={sections.sv201?.img} className="w-100" style={{ display: "block" }}  alt="" />
+                        </>
                     )}
 
-                    {/* Section ti02 */}
-                    {sections.ti02 && (
-                        <img src={sections.ti02?.img} className="w-100" style={{ display: "block" }} alt="" />
-
-                    )}
-
-                    {/* Section ti03 */}
-                    {sections.ti03 && (
-                        <img src={sections.ti03?.img} className="w-100" style={{ display: "block" }} alt="" />
+                    {/* Section sv202 */}
+                    {sections.sv202 && (
+                        <img src={sections.sv202?.img} className="w-100" style={{ display: "block" }}  alt="" />
 
                     )}
 
-                    {/* Section ti04 */}
-                    {sections.ti04 && (
-                        <img src={sections.ti04?.img} className="w-100" style={{ display: "block" }} alt="" />
-
-                    )}
-
+ 
                 </>
             )}
 

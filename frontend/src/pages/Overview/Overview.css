@@ -1,17 +1,15 @@
-.about-head {
-    background: url(https://i.postimg.cc/tCw9xr9D/head-title.jpg) no-repeat;
-    transform: translateY(-70px);
-    height: 210px;
-    vertical-align: middle;
-    font-weight: bold;
-    color: #fff;
-    padding-top: 70px;
-    border-bottom: 18px solid #000;
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-  }
-  
+.head{
+  background: url(https://i.postimg.cc/tCw9xr9D/head-title.jpg) no-repeat;
+  height: 210px;
+  vertical-align: middle;
+  font-weight: bold;
+  color: #fff;
+  padding-top: 70px;
+  border-bottom: 18px solid #000;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+}
   @media (max-width: 768px) {
     .about-head {
       height: 150px;
@@ -21,7 +19,7 @@
   }
   
   @media (max-width: 576px) {
-    .about-head {
+    .ov-head {
       height: 120px;
       padding-top: 40px;
       font-size: 1.2rem;

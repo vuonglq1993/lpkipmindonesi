@@ -3,6 +3,8 @@ import { Row, Col } from "react-bootstrap";
 import { db } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useLanguage } from "../context/LanguageContext";
+import { Link } from "react-router-dom";
+import "./contact.css";
 
 export default function ContactSection() {
   const { language } = useLanguage();
@@ -20,7 +22,7 @@ export default function ContactSection() {
   }, [language]);
 
   return (
-    <section className="contact pt-5">
+    <section className="contact bg-white py-5 mb-0">
       <Row>
         <h1 className="mt-5 text-center">{contactData.title || "Contact us"}</h1>
       </Row>
@@ -34,18 +36,17 @@ export default function ContactSection() {
       <Row className="mt-5 mb-5 justify-content-center">
         <Col md={2}></Col>
         <Col md={4}>
-          <img
-            src={contactData.img1}
-            className="img-fluid ms-5"
-            alt="contact-option-1"
-          />
+<p className="fs-4 fw-bold text-center" style={{ color: "#b80201" }} >
+  Tel. <br />(+62) 812-8316-3842
+</p>
         </Col>
         <Col md={4}>
-          <img
+        <Link to="/contact"><img
             src={contactData.img2}
             className="img-fluid ms-5"
             alt="contact-option-2"
           />
+          </Link>
         </Col>
         <Col md={2}></Col>
       </Row>

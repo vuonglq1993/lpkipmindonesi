@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { db } from '../../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useLanguage } from '../../context/LanguageContext';
@@ -10,6 +10,20 @@ import './Home.css';
 export default function Home() {
     const { language } = useLanguage();
     const [content, setContent] = useState(null);
+
+    useEffect(() => {
+        const handleContextMenu = (e) => {
+            if (e.target.tagName === "IMG") {
+                e.preventDefault();
+            }
+        };
+
+        document.addEventListener("contextmenu", handleContextMenu);
+
+        return () => {
+            document.removeEventListener("contextmenu", handleContextMenu);
+        };
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,14 +55,14 @@ export default function Home() {
     if (!content) return null;
 
     return (
-        <Container className="home-head pt-5 bg-white">
+        <Container fluid className="home-head pt-5 bg-white">
             <Row className="justify-content-center">
                 {/* Slide */}
                 <div className="banner">
                     <Container>
-                        <Col sm={6}>
+                        <Col sm={12} lg={6}>
                             <p className="fs-1 fw-bold ms-4 text-white">{content.banner.title}</p>
-                            <p className="fs-4 ms-4 text-black">{content.banner.description}</p>
+                            <p className="fs-4 ms-4 fw-lighter text-black">{content.banner.description}</p>
 
                         </Col>
                     </Container>
@@ -68,27 +82,113 @@ export default function Home() {
 
 
                 {/* H03 */}
-                <div className="h03 pt-5">
-                    <Row className="py-5 justify-content-center my-5">
-                        <Col sm={3}>
-                            <Link to="/mind" className="text-white text-decoration-none"><img src={content.h03.img1} className="img-fluid rounded shadow-lg" alt="" /></Link>
+                <div className="h03 pt-3">
+                    <Row className="py-2 justify-content-center my-5">
+                        <p
+                            className="fs-1 fw-bold mb-5 text-center"
+                            style={{ color: "#0171de" }}
+                        >
+                            {content.h03.title}
+                        </p>
+                        <Col sm={3} className="mt-2">
+                            <Card className="h-100 d-flex flex-column py-1"
+                                style={{
+                                    borderRadius: '15px',
+                                    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                                    backgroundColor: '#f4f8ff',
+                                }}>
+                                <Card.Body className="px-0 d-flex flex-column">
+                                    <div style={{ textAlign: 'start' }}>
+                                        <img
+                                            src={content.h03.icon1}
+                                            alt="icon"
+                                            style={{ width: '50px', height: '50px' }}
+                                        />
+                                    </div>
+                                    <Card.Title className="text-start mt-4" style={{ fontWeight: 'bold', color: '#0171de', textAlign: 'center' }}>
+                                        <p className="fs-3">{content.h03.title1}</p>
+                                    </Card.Title>
+                                    <Card.Text>
+                                        <p className="fs-5 fw-light">{content.h03.description1}</p>
+                                    </Card.Text>
+
+                                </Card.Body>
+                            </Card>
                         </Col>
-                        <Col sm={3}>
-                            <Link to="/strength" className="text-white text-decoration-none"><img src={content.h03.img2} className="img-fluid rounded shadow-lg" alt="" /></Link>
+
+                        {/* Card 2 */}
+                        <Col sm={3} className="mt-2">
+                            <Card className="h-100 d-flex flex-column py-1"
+                                style={{
+                                    borderRadius: '15px',
+                                    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                                    backgroundColor: '#f4f8ff',
+                                }}>
+                                <Card.Body className="px-0 d-flex flex-column">
+                                    <div style={{ textAlign: 'start' }}>
+                                        <img
+                                            src={content.h03.icon2}
+                                            alt="icon"
+                                            style={{ width: '50px', height: '50px' }}
+                                        />
+                                    </div>
+                                    <Card.Title className="text-start mt-4" style={{ fontWeight: 'bold', color: '#0171de', textAlign: 'center' }}>
+                                        <p className="fs-3">{content.h03.title2}</p>
+                                    </Card.Title>
+                                    <Card.Text>
+                                        <p className="fs-5 fw-light">{content.h03.description2}</p>
+                                    </Card.Text>
+                                    <Link
+                                        to="/strength"
+                                        className="mt-auto"
+                                        style={{
+                                            color: '#0171de',
+                                            fontWeight: '500',
+                                            display: 'inline-block',
+                                            textDecoration: 'none',
+                                        }}
+                                    >
+                                        <p className="fs-4 fw-light">{content.h03.link}<span style={{ marginLeft: '5px' }}>| &nbsp;&rarr;</span></p>
+                                    </Link>
+                                </Card.Body>
+                            </Card>
                         </Col>
-                        <Col sm={3}>
-                            <Link to="/mission" className="text-white text-decoration-none"><img src={content.h03.img3} className="img-fluid rounded shadow-lg" alt="" /></Link>
+
+                        {/* Card 3 */}
+                        <Col sm={3} className="mt-2">
+                            <Card className="h-100 d-flex flex-column py-1"
+                                style={{
+                                    borderRadius: '15px',
+                                    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                                    backgroundColor: '#f4f8ff',
+                                }}>
+                                <Card.Body className="px-0 d-flex flex-column">
+                                    <div style={{ textAlign: 'start' }}>
+                                        <img
+                                            src={content.h03.icon3}
+                                            alt="icon"
+                                            style={{ width: '50px', height: '50px' }}
+                                        />
+                                    </div>
+                                    <Card.Title className="text-start mt-4" style={{ fontWeight: 'bold', color: '#0171de', textAlign: 'center' }}>
+                                        <p className="fs-3">{content.h03.title3}</p>
+                                    </Card.Title>
+                                    <Card.Text>
+                                        <p className="fs-5 fw-light">{content.h03.description3}</p>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
                         </Col>
                     </Row>
                 </div>
 
                 {/* H05 */}
                 <Row className="h05 text-white justify-content-center mt-5 mb-5">
-                    <Col md={4} xs={10} className="text-start">
+                    <Col xs={10} md={4} className="text-start">
                         <Row>
                             <p className="fs-1 text-primary fw-bolder">{content.h05.lefttitle}</p>
                         </Row>
-                        <Row className="mt-4">
+                        <Row className="mt-4 justify-content-center">
                             <Col xs={3}>
                                 <img src={content.h05.lefticon1} className="img-fluid border mt-3" alt="" />
                             </Col>
@@ -128,86 +228,73 @@ export default function Home() {
                     </Col>
                 </Row>
                 {/* H07 */}
-                <Row className="h07 justify-content-center text-white pt-5">
-                <p className="fs-2 fw-bold text-white text-center mt-3 mb-5">{content.h07.title}</p>
+                <Container className="h07 text-white pt-5">
+                    <p className="fs-2 fw-bold text-center mt-3 mb-5">
+                        {content.h07.title}
+                    </p>
 
-                    <Row className="justify-content-center text-white mb-1">
-                        <Col xs={6} className="bg-opacity-25 bg-white mx-1 ps-4 pe-5 pt-3">
-                            <Row>
-                                <p className="fs-5 fw-bold">{content.h07.col1title}</p>
-                            </Row>
-                            <Row>
-                                <Col xs={2}>
+                    {/* ROW 1 */}
+                    <Row className="justify-content-center gap-3">
+                        <Col xs={10} className="col-5-5 bg-custom p-4 rounded-3">
+                            <p className="fs-5 fw-bold text-center">{content.h07.col1title}</p>
+                            <hr />
+
+                            <Row className="align-items-center">
+                                <Col xs={4} md={2}>
                                     <img src={content.h07.col1icon} className="img-fluid border p-2" alt="" />
-
                                 </Col>
-                                <Col xs={10}>
-                                    <p className="fs-6 me-5 mt-3">{content.h07.col1des}</p>
-
+                                <Col xs={8} md={10}>
+                                    <p className="fs-6 mb-0">{content.h07.col1des}</p>
                                 </Col>
                             </Row>
-
-
-
                         </Col>
-                        <Col xs={5} className="bg-opacity-25 bg-white ps-4 pt-3">
-                            <Row>
-                                <p className="fs-5 fw-bold">{content.h07.col2title}</p>
-                            </Row>
-                            <Row>
-                                <Col xs={2}>
+
+                        <Col xs={10} className="col-5-5 bg-custom p-4 rounded-3">
+                            <p className="fs-5 fw-bold text-center">{content.h07.col2title}</p>
+                            <hr />
+
+                            <Row className="align-items-center">
+                                <Col xs={4} md={2}>
                                     <img src={content.h07.col2icon} className="img-fluid border p-2" alt="" />
-
                                 </Col>
-                                <Col xs={10}>
-                                    <p className="fs-6 me-4 mt-2">{content.h07.col2des}</p>
-
+                                <Col xs={8} md={10}>
+                                    <p className="fs-6 mb-0">{content.h07.col2des}</p>
                                 </Col>
                             </Row>
-
-
-
                         </Col>
                     </Row>
-                    <Row className="justify-content-center text-start">
-                        <Col xs={5} className="bg-opacity-25 bg-white mx-1 ps-4 pe-2 pt-3">
-                            <Row>
-                                <p className="fs-5 fw-bold">{content.h07.col3title}</p>
-                            </Row>
-                            <Row>
-                                <Col xs={2}>
+
+                    {/* ROW 2 */}
+                    <Row className="justify-content-center gap-3 mt-3">
+                        <Col xs={10} className="col-5-5 bg-custom p-4 rounded-3">
+                            <p className="fs-5 fw-bold text-center">{content.h07.col3title}</p>
+                            <hr />
+
+                            <Row className="align-items-center">
+                                <Col xs={4} md={2}>
                                     <img src={content.h07.col3icon} className="img-fluid border p-2" alt="" />
-
                                 </Col>
-                                <Col xs={10}>
-                                    <p className="fs-6 me-4 mt-1">{content.h07.col3des}</p>
-
+                                <Col xs={8} md={10}>
+                                    <p className="fs-6 mb-0">{content.h07.col3des}</p>
                                 </Col>
                             </Row>
-
-
-
                         </Col>
-                        <Col xs={6} className="bg-opacity-25 bg-white ps-4 pe-5 pt-3">
-                            <Row>
-                                <p className="fs-5 fw-bold">{content.h07.col4title}</p>
-                            </Row>
-                            <Row>
-                                <Col xs={2}>
-                                    <img src={content.h07.col4icon} className="img-fluid border p-3" alt="" />
 
+                        <Col xs={10} className="col-5-5 bg-custom p-4 rounded-3">
+                            <p className="fs-5 fw-bold text-center">{content.h07.col4title}</p>
+                            <hr />
+
+                            <Row className="align-items-center">
+                                <Col xs={4} md={2}>
+                                    <img src={content.h07.col4icon} className="img-fluid border p-2" alt="" />
                                 </Col>
-                                <Col xs={10}>
-                                    <p className="fs-6 me-4 mt-3">{content.h07.col4des}</p>
-
+                                <Col xs={8} md={10}>
+                                    <p className="fs-6 mb-0">{content.h07.col4des}</p>
                                 </Col>
                             </Row>
-
-
-
                         </Col>
                     </Row>
-                </Row>
+                </Container>
             </Row>
         </Container>
     );

@@ -12,6 +12,20 @@ export default function OurStrength() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const handleContextMenu = (e) => {
+          if (e.target.tagName === "IMG") {
+            e.preventDefault();
+          }
+        };
+      
+        document.addEventListener("contextmenu", handleContextMenu);
+      
+        return () => {
+          document.removeEventListener("contextmenu", handleContextMenu);
+        };
+      }, []);
+      
+    useEffect(() => {
         const fetchData = async () => {
             const colName = language === 'en' ? 'ourStrength' : 'ourStrengthjp';
             const querySnapshot = await getDocs(collection(db, colName));
@@ -27,117 +41,28 @@ export default function OurStrength() {
     }, [language]);
 
     const renderSection = (sections) => (
-        <>
+        <Row className="st-01">
             {/* Section st01 */}
-            <Row className="justify-content-center">
-                <Col md={12}>
-                    <Row className="justify-content-center">
-                        <Col xs={10}>
-                            <img src={sections.st01?.img1} className="img-fluid" alt="" />
-                        </Col>
-                    </Row>
-                    <Row className="justify-content-center">
-                        <Col xs={10}>
-                            <img src={sections.st01?.img2} className="img-fluid" alt="" />
-                        </Col>
-                    </Row>
-                    <Row className="mt-5 pb-5 justify-content-center">
-                        <Col md={10}>
-                            <p className="fs-1 text-center text-black">{sections.st01?.text1}</p>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
 
+            <img src={sections.st01?.img1} className="w-100" style={{ display: "block" }}  alt="" />
             {/* Section st02 */}
-            <Row className="mt-4 justify-content-center">
-            </Row>
+            <img src={sections.st02?.img} className="img-fluid"  alt="" />
+
 
             {/* Section st03 */}
-            {sections.st03 && (
-                <Row className="st-03">
-                    <Col>
-                        <img src={sections.st03.img} className="img-fluid" alt="" />
-                        {[1, 2, 3].map((i) => (
-                            <>
-                                {sections.st03[`text${i}`] && <p className="fs-2 mt-5">{sections.st03[`text${i}`]}</p>}
-                                {sections.st03[`desc${i}`] && <p className="fs-6">{sections.st03[`desc${i}`]}</p>}
-                            </>
-                        ))}
-                    </Col>
-                </Row>
-            )}
+            <img src={sections.st03?.img} className="img-fluid"  alt="" />
 
-            {/* Section st04 */}
-            {sections.st04 && (
-                <Row className="st-04">
-                    <Col md={6}></Col>
-                    <Col md={6}>
-                        <img src={sections.st04.img} className="img-fluid" alt="" />
-                        {[1, 2, 3].map((i) => (
-                            <>
-                                {sections.st04[`text${i}`] && <p className="fs-2 mt-3 fw-bold">{sections.st04[`text${i}`]}</p>}
-                                {sections.st04[`desc${i}`] && <p className="fs-6">{sections.st04[`desc${i}`]}</p>}
-                            </>
-                        ))}
-                    </Col>
-                </Row>
-            )}
 
-            {/* Section st05 */}
-            {sections.st05 && (
-                <Row className="st-05">
-                    <Col>
-                        <img src={sections.st05.img} className="img-fluid" alt="" />
-                        {[1, 2, 3, 4].map((i) => (
-                            <>
-                                {sections.st05[`text${i}`] && <p className="fs-2 mt-3 fw-bold">{sections.st05[`text${i}`]}</p>}
-                                {sections.st05[`desc${i}`] && <p className="fs-6">{sections.st05[`desc${i}`]}</p>}
-                            </>
-                        ))}
-                    </Col>
-                </Row>
-            )}
-
-            {/* Section st06 */}
-            {sections.st06 && (
-                <Row className="st-06 text-center justify-content-center">
-                    <Col md={10}>
-                        <div className="cycle-text-wrapper">
-                            <p className="cycle-text">
-                                {sections.st06.text1} <br />
-                                {sections.st06.text2} <span className="highlight">{sections.st06.highlightText}</span>
-                            </p>
-                        </div>
-                    </Col>
-                </Row>
-            )}
-
-            {/* Section st07 */}
-            {sections.st07 && (
-                <Row className="st-07 justify-content-center">
-
-                    {[1, 2, 3, 4].map((i) => (
-                        
-                        <Col md={5} key={i}>
-                            <img src={sections.st07[`img${i}`]} className="img-fluid" alt="" />
-                        </Col>
-                    ))}
-                </Row>
-            )}
-        </>
+        </Row>
     );
 
     return (
-        <Container className="py-5 bg-white">
+        <Container fluid className="px-0">
             <Helmet>
                 <title>Our Strength - {language === 'en' ? 'English' : 'Japanese'}</title>
                 <meta name="description" content="Our company strength" />
             </Helmet>
 
-            <Row className="about-head">
-            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Our Strengths' : '私たちの強み'}</h1>
-            </Row>
 
             {loading ? <p className="text-center">Loading...</p> : renderSection(sections)}
 

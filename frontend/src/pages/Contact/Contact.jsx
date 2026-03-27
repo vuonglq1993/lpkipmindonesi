@@ -46,8 +46,8 @@ export default function Contact() {
     };
 
     return (
-        <Container className="py-5 bg-white">
-            <Row className="about-head">
+        <Container className="bg-white">
+            <Row className="contact-head">
                 <h1 className="text-white text-center fw-bold">
                     {language === 'en' ? 'Contact' : 'お問い合わせ'}
                 </h1>

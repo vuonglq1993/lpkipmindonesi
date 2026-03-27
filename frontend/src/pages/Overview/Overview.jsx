@@ -4,12 +4,27 @@ import { collection, getDocs } from 'firebase/firestore';
 import { Container, Row, Col, Table } from 'react-bootstrap';
 import ContactSection from '../../components/contact';
 import { useLanguage } from '../../context/LanguageContext';
+import "./Overview.css";
 
 export default function Overview() {
     const { language } = useLanguage();
     const [rows, setRows] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        const handleContextMenu = (e) => {
+          if (e.target.tagName === "IMG") {
+            e.preventDefault();
+          }
+        };
+      
+        document.addEventListener("contextmenu", handleContextMenu);
+      
+        return () => {
+          document.removeEventListener("contextmenu", handleContextMenu);
+        };
+      }, []);
+      
     useEffect(() => {
         const fetchData = async () => {
             const colName = language === 'en' ? 'UnionTable' : 'UnionTablejp';
@@ -40,10 +55,10 @@ export default function Overview() {
     };
 
     return (
-        <Container className="py-5 bg-white">
+        <Container fluid className=" bg-white">
             {/* Section Header */}
-            <Row className="about-head">
-            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Union Overviews' : '組合概要'}</h1>
+            <Row className="head">
+            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'COMPANY PROFILE' : '会社概要'}</h1>
             </Row>
 
             {/* Section Table */}
@@ -51,7 +66,7 @@ export default function Overview() {
                 <p className="text-center">Loading...</p>
             ) : (
                 <Row className="justify-content-center">
-                    <Col xs={12} md={8}>
+                    <Col xs={12} md={10}>
                         <Table responsive className="table table-striped table-top-bottom-border">
                             <tbody>
                                 {rows.map(renderRow)}

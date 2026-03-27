@@ -15,8 +15,12 @@ import CreateNewsPage from "./pages/CreateNewsPage";
 import EditNewsPage from "./pages/EditNewsPage";
 import EditNewsById from "./pages/EditNewsById";
 import EditNewsPagejp from "./pages/EditNewsByIdJP";
+import EditRecruitmentById from "./pages/EditRecruitmentById";
+import CreateRecruitment from "./pages/CreateRecruitment";
+import EditrecruitmentPage from "./pages/EditRecruitmentPage";
 
 import ContactEditor from "./pages/ContactComponentEditor";
+import { Editor } from "@tiptap/react";
 export default function App() {
   return (
     <AuthProvider>
@@ -105,7 +109,7 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-                    <Route
+          <Route
             path="/admin/news/:id"
             element={
               <ProtectedRoute>
@@ -113,7 +117,7 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-                              <Route
+          <Route
             path="/admin/newsjp/:id"
             element={
               <ProtectedRoute>
@@ -131,13 +135,39 @@ export default function App() {
             }
           />
           <Route
-            path="/admin/comparison-table"
+            path="/admin/recruitment"
             element={
               <ProtectedRoute>
-                <ComparisonTableEditor />
+                <CreateRecruitment />
               </ProtectedRoute>
             }
           />
+
+<Route
+            path="/admin/editrecruitment"
+            element={
+              <ProtectedRoute>
+                <EditrecruitmentPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/recruitment/:id"
+            element={
+              <ProtectedRoute>
+                <EditRecruitmentById />
+              </ProtectedRoute>
+            }
+          />
+                    <Route
+            path="/admin/recruitmentjp/:id"
+            element={
+              <ProtectedRoute>
+                <EditRecruitmentById />
+              </ProtectedRoute>
+            }
+          />
+
         </Routes>
 
       </BrowserRouter>

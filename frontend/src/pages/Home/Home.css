@@ -2,15 +2,49 @@
     background: url(https://i.postimg.cc/BQQty5dq/TRANG-CH-17.png) no-repeat;
     background-size: cover;
     min-height: 600px;
-    padding: 200px 0 200px 100px;
+    padding-top: 200px;
 }
 
+  /* Màn hình ≥1200px (xl) */
+  @media (min-width: 1200px) {
+    .banner .fs-1 {
+      font-size: 3rem !important;
+    }
+
+    .banner .fs-4 {
+        font-size: 1.5rem !important;
+      }
+  }
+  
+  /* Màn hình ≥1400px (xxl) */
+  @media (min-width: 1400px) {
+    .banner .fs-1 {
+      font-size: 2.5rem !important;
+    }
+
+    .banner .fs-4 {
+        font-size: 1.75rem !important;
+      }
+  }
+  
+  /* Nếu muốn cho 2K, 4K (≥1800px) */
+  @media (min-width: 1800px) {
+    .banner .fs-1 {
+      font-size: 4rem !important;
+    }
+    .banner .fs-4 {
+        font-size: 2.5rem !important;
+      }
+  }
+  
+  
 .banner .fs-1 {
     text-shadow: 1px 1px 2px rgb(78, 115, 252);    
 }
 
+
 .h03 {
-    background: url(https://i.postimg.cc/v8Vh2xCS/TRANG-CH-02.png) no-repeat;
+    background: url(https://res.cloudinary.com/du73nhdbv/image/upload/v1758178598/TRANG_CHU%CC%89_3-02_ghj1dj.jpg) no-repeat;
     background-size: cover;
     min-height: 200px;
 }
@@ -37,8 +71,24 @@
 }
 
 .h07 {
-    background: url(https://i.postimg.cc/sfLDSyQz/TRANG-CH-03.png) no-repeat;
+    background: url(https://res.cloudinary.com/du73nhdbv/image/upload/v1774593551/TRANG_CH%E1%BB%A6_ENG-12_mc5sl6.png) no-repeat;
     background-size: cover;
     min-height: 600px;
     padding: 100px 0 100px 100px;
+}
+
+.col-5-5 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .col-5-5 {
+    flex: 0 0 45.8333%;
+    max-width: 45.8333% !important;
+  }
+}
+
+.bg-custom{
+    background-color: #0171de;  
 }

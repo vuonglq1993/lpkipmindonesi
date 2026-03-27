@@ -1,0 +1,6 @@
+.footer{
+    background-image: url("https://res.cloudinary.com/du73nhdbv/image/upload/v1756970575/cu%E1%BB%91i_trang-01_qavh0l.png");
+    background-size: cover;     /* Ảnh phủ kín */
+    background-position: center; /* Căn giữa */
+    background-repeat: no-repeat; /* Không lặp lại */
+}

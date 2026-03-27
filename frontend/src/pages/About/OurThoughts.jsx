@@ -12,6 +12,20 @@ export default function OurThoughts() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const handleContextMenu = (e) => {
+          if (e.target.tagName === "IMG") {
+            e.preventDefault();
+          }
+        };
+      
+        document.addEventListener("contextmenu", handleContextMenu);
+      
+        return () => {
+          document.removeEventListener("contextmenu", handleContextMenu);
+        };
+      }, []);
+      
+    useEffect(() => {
         const fetchData = async () => {
             const colName = language === 'en' ? 'ourThoughts' : 'ourThoughtsjp';
             const querySnapshot = await getDocs(collection(db, colName));
@@ -29,72 +43,29 @@ export default function OurThoughts() {
     const renderSection = (sections) => (
         <>
             {/* Section t01 */}
-            {sections.t01 && (
-                <Row className="justify-content-center">
-                    <Col md={12}>
-                        <Row className="justify-content-center">
-                            <Col xs={10}>
-                                <img
-                                    src={sections.t01.img}
-                                    className="passion-img img-fluid"
-                                    alt="Main Visual"
-                                />
-                            </Col>
-                        </Row>
-                        <Row className="mt-5 passion-text">
-                            <p className="fs-1 text-center text-black">{sections.t01.text1}</p>
-                            <p className="fs-1 text-center text-black">{sections.t01.text2}</p>
-                        </Row>
-                    </Col>
-                </Row>
-            )}
+            <Row className="t-01">
+            {/* Section st01 */}
 
-            {/* Section t02 */}
-            {sections.t02 && (
-                <Row className="mt-4 justify-content-center">
-                </Row>
-            )}
+            <img src={sections.t01?.img} className="w-100" style={{ display: "block" }}  alt="" />
+            {/* Section st02 */}
+            <img src={sections.t02?.img} className="img-fluid"  alt="" />
 
-            {/* Section t03 */}
-            {sections.t03 && (
-                <Row className="PA-04">
-                    <Col>
-                        <h1>{sections.t03.bigtext}</h1>
-                        {sections.t03.text1 && <p className="fs-3">{sections.t03.text1}</p>}
-                        {sections.t03.text2 && <p className="fs-3">{sections.t03.text2}</p>}
-                        {sections.t03.text3 && <p className="fs-3">{sections.t03.text3}</p>}
-                        {sections.t03.text4 && <p className="fs-3">{sections.t03.text4}</p>}
-                    </Col>
-                </Row>
-            )}
 
-            {/* Section t04 */}
-            {sections.t04 && (
-                <Row className="PA-05">
-                    <Col>
-                        <h1 className="mb-5">{sections.t04.bigtext}</h1>
-                        {sections.t04.boldtext1 && <p className="fs-3 fw-bold">{sections.t04.boldtext1}</p>}
-                        {sections.t04.boldtext2 && <p className="fs-3 fw-bold">{sections.t04.boldtext2}</p>}
-                        {sections.t04.smalltext && <p className="fs-6">{sections.t04.smalltext}</p>}
-                        {sections.t04.text1 && <p className="fs-3">{sections.t04.text1}</p>}
-                        {sections.t04.text2 && <p className="fs-3">{sections.t04.text2}</p>}
-                        {sections.t04.text3 && <p className="fs-3">{sections.t04.text3}</p>}
-                    </Col>
-                </Row>
-            )}
+            {/* Section st03 */}
+            <img src={sections.t03?.img} className="img-fluid"  alt="" />
+
+
+        </Row>
         </>
     );
 
     return (
-        <Container className="py-5 bg-white">
+        <Container fluid className="px-0">
             <Helmet>
                 <title>Our Thoughts - {language === 'en' ? 'English' : 'Japanese'}</title>
                 <meta name="description" content="Company beliefs and philosophies" />
             </Helmet>
 
-            <Row className="about-head">
-            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Our Thoughts' : '私たちの想い'}</h1>
-            </Row>
 
             {loading ? <p className="text-center">Loading...</p> : renderSection(sections)}
 
