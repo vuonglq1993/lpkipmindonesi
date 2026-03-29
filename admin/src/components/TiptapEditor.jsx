@@ -64,17 +64,30 @@ const MenuBar = ({ editor }) => {
 
             <button
                 onClick={() => {
-                    const rawUrl = window.prompt("Nhập URL ảnh:");
-                    if (!rawUrl) return;
+                    const input = document.createElement("input");
+                    input.type = "file";
+                    input.accept = "image/*";
 
-                    const url = rawUrl.trim().replace(/^['"]|['"]$/g, "");
+                    input.onchange = async () => {
+                        const file = input.files[0];
+                        if (!file) return;
 
-                    // Chèn ảnh bằng API Tiptap
-                    editor.chain().focus().setImage({ src: url }).run();
+                        try {
+                            const url = await uploadImage(file);
+
+                            editor.chain().focus().setImage({ src: url }).run();
+
+                        } catch (err) {
+                            console.error(err);
+                            alert("Upload ảnh thất bại");
+                        }
+                    };
+
+                    input.click();
                 }}
                 className="btn btn-light"
             >
-                🖼️ Ảnh
+                🖼️ Upload
             </button>
             <button
                 onClick={() => {
@@ -103,6 +116,26 @@ const MenuBar = ({ editor }) => {
 
         </div>
     );
+};
+
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+        {
+            method: "POST",
+            body: formData,
+        }
+    );
+
+    const data = await res.json();
+    return data.secure_url;
 };
 
 const TiptapEditor = ({ content, onChange }) => {
