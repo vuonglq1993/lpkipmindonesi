@@ -80,6 +80,12 @@ export default function TechnicalInternTraining() {
 
                     )}
 
+                                        {/* Section ti05 */}
+                    {sections.ti05 && (
+                        <img src={sections.ti05?.img} className="w-100" style={{ display: "block" }} alt="" />
+
+                    )}
+
                 </>
             )}
 

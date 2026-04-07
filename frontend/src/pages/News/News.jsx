@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
@@ -11,7 +11,17 @@ export default function News() {
   const { language } = useLanguage();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [banner, setBanner] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      const col = language === 'en' ? 'news' : 'newsjp';
+      const snap = await getDoc(doc(db, col, 'banner'));
+      if (snap.exists()) setBanner(snap.data());
+    };
+    fetchBanner();
+  }, [language]);
 
   useEffect(() => {
     const handleContextMenu = (e) => {
@@ -33,7 +43,7 @@ export default function News() {
       const snap = await getDocs(collection(db, col));
       const items = [];
       snap.forEach((doc) => {
-        items.push({ id: doc.id, ...doc.data() });
+        if (doc.id !== 'banner') items.push({ id: doc.id, ...doc.data() });
       });
       items.sort((a, b) => b.date?.seconds - a.date?.seconds); // sort by newest
       setArticles(items);
@@ -44,11 +54,10 @@ export default function News() {
   }, [language]);
 
   return (
-    <Container fluid className=" bg-white">
-      {/* Header */}
-      <Row className="news-head">
-        <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'News' : 'ニュース'}</h1>
-      </Row>
+    <>
+      {banner?.img && (
+        <img src={banner.img} className="w-100" style={{ display: 'block' }} alt="" />
+      )}
 
       {/* News List */}
       <Container className="my-5">
@@ -79,6 +88,6 @@ export default function News() {
 
       {/* Contact Section */}
       <ContactSection />
-    </Container>
+    </>
   );
 }

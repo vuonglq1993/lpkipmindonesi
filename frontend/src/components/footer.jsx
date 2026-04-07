@@ -5,165 +5,166 @@ import { db } from '../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useLanguage } from '../context/LanguageContext';
 import logo from '../assets/LPKPMINDONESIA.png';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import "./footer.css";
 
 export default function Footer() {
     const { language } = useLanguage();
-    const [menuItems, setMenuItems] = useState({});
     const [footerInfo, setFooterInfo] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            const navCol = language === 'en' ? 'navigation' : 'navigationjp';
             const footerCol = language === 'en' ? 'footer' : 'footerjp';
-
-            const navDoc = await getDoc(doc(db, navCol, 'menu'));
             const footerDoc = await getDoc(doc(db, footerCol, 'menu'));
-
-            if (navDoc.exists()) {
-                setMenuItems(navDoc.data());
-            }
-
             if (footerDoc.exists()) {
                 setFooterInfo(footerDoc.data());
             }
         };
-
         fetchData();
     }, [language]);
 
-    if (!menuItems.about || !footerInfo) return null;
+    if (!footerInfo) return null;
+
+    // Partner logos: partner1 ~ partner8
+    const partners = [
+        footerInfo.partner1,
+        footerInfo.partner2,
+        footerInfo.partner3,
+        footerInfo.partner4,
+        footerInfo.partner5,
+        footerInfo.partner6,
+        footerInfo.partner7,
+        footerInfo.partner8,
+    ].filter(Boolean);
+
+    // Branch offices: b1title, b1addr, b1email ... b5title, b5addr, b5email
+    const branches = [1, 2, 3, 4, 5].map(i => ({
+        title: footerInfo[`b${i}title`],
+        addr: footerInfo[`b${i}addr`],
+        email: footerInfo[`b${i}email`],
+    })).filter(b => b.title);
+
+    // Member organizations: member1img~member4img, member1label~member4label
+    const members = [1, 2, 3, 4].map(i => ({
+        img: footerInfo[`member${i}`],
+        name: footerInfo[`member${i}name`],
+        label: footerInfo[`member${i}label`],
+    })).filter(m => m.img);
 
     return (
-        <Container fluid className="bg-white footer text-dark px-0">
-            <Row className="text-start justify-content-center pb-4 pt-5">
-                <Col xs={11} md={5} className="pt-0">
-                    <img
-                        src={logo}
-                        alt="logo"
-                        className="mb-3"
-                        height={120}
-                    />
-                    <p className="mt-1 fs-5"><strong>Head office: </strong>{footerInfo.address}</p>
-                    <p className="mt-1 fs-5"><strong>Japanese School: </strong><br />{footerInfo.japaneseschool} <br />{footerInfo.japaneseschool2}</p>
-                    <p className="mt-1 fs-5"><strong>Hotline: </strong>{footerInfo.phone}</p>
-                    <p className="mt-1 fs-5"><strong>Email: </strong>{footerInfo.email}</p>
+        <Container className="footer text-dark px-0 pb-4">
 
+            {/* ── Row 1: Partner logos ── */}
+            <div className="partner-row">
+                {partners.map((src, idx) => (
+                    <div key={idx} className="partner-cell">
+                        <img src={src} alt={`partner-${idx + 1}`} className="partner-logo" />
+                    </div>
+                ))}
+            </div>
 
-
-                </Col>
-                <Col xs={11} md={6}>
-                    <Row className="">
-                        <Col xs={6} md={3} className="px-3">
-                            <h5 className="fw-bold">{menuItems.about}</h5>
-                            <ul className="list-unstyled text-start mt-3">
-                                <li className="mt-2"><Link to="/mind" className="text-black text-decoration-none">{menuItems.thoughts}</Link></li>
-                                <li className="mt-2"><Link to="/strength" className="text-black text-decoration-none">{menuItems.strength}</Link></li>
-                                <li className="mt-2"><Link to="/mission" className="text-black text-decoration-none">{menuItems.mission}</Link></li>
-                            </ul>
+            {/* ── Row 2: Company info + Branch offices ── */}
+            <Row className="px-4 py-3 g-0">
+                {/* Left col – small: company info */}
+                <Col xs={12} md={4} className="pe-md-4 mb-4 mb-md-0">
+                    {/* Sub-row 1: logo + company name + tagline */}
+                    <Row className="align-items-center g-0 mb-3">
+                        <Col xs="auto">
+                            <img src={logo} alt="logo" className="footer-logo me-3" />
                         </Col>
-
-                        <Col xs={6} md={5} className="px-3">
-                            <h5 className="fw-bold">{menuItems.system}</h5>
-                            <ul className="list-unstyled mt-3">
-                                <li className="mt-2"><Link to="/regulation" className="text-black text-decoration-none">{menuItems.intern}</Link></li>
-                                <li className="mt-2"><Link to="/skills" className="text-black text-decoration-none">{menuItems.skill}</Link></li>
-                            </ul>
-                        </Col>
-
-                        <Col xs={6} md={4} className="px-3">
-                            <h5 className="fw-bold">{menuItems.overview}</h5>
-                            <ul className="list-unstyled mt-3">
-                                <li className="mt-2"><Link to="/news" className="text-black text-decoration-none">{menuItems.news}</Link></li>
-                                <li className="mt-2"><Link to="/contact" className="text-black text-decoration-none">{menuItems.contact}</Link></li>
-                            </ul>
-                        </Col>
-
-                    </Row>
-
-                    <Row className="Justify-content-center">
-                        <Col xs={5} md={3}>
-                            <Row>
-                                <p className="fs-4 fw-bold">{footerInfo.contact}</p>
-                            </Row>
-                            <Row className="">
-                                <Col xs={4}>
-                                    <img
-                                        src={footerInfo.facebook}
-                                        alt="logo"
-                                        className="img-fluid"
-                                    />
-                                </Col>
-                                <Col xs={4}>
-                                    <img
-                                        src={footerInfo.youtube}
-                                        alt="logo"
-                                        className="img-fluid"
-
-                                    />
-                                </Col>
-                            </Row>
-                        </Col>
-                        <Col xs={7} md={9}>
-                            <Row>
-                                <p className="fs-4 fw-bold text-center">{footerInfo.member}</p>
-                            </Row>
-                            <Row className="justify-content-center mt-3">
-                                <Col xs={3}>
-                                <img
-                                        src={footerInfo.member1}
-                                        alt="logo"
-                                        className="img-fluid"
-                                    />
-                                </Col>
-                                <Col xs={3}>
-                                <img
-                                        src={footerInfo.member2}
-                                        alt="logo"
-                                        className="img-fluid"
-                                    />
-                                </Col>
-                                <Col xs={3}>
-                                <img
-                                        src={footerInfo.member3}
-                                        alt="logo"
-                                        className="img-fluid"
-                                    />
-                                </Col>
-                            </Row>
-                            <Row className="justify-content-center mt-3">
-                            <Col xs={3}>
-                                <img
-                                        src={footerInfo.member4}
-                                        alt="logo"
-                                        className="img-fluid"
-                                    />
-                                </Col>
-                                <Col xs={3}>
-                                <img
-                                        src={footerInfo.member5}
-                                        alt="logo"
-                                        className="img-fluid"
-                                    />
-                                </Col>
-                                <Col xs={3}>
-                                <img
-                                        src={footerInfo.member6}
-                                        alt="logo"
-                                        className="img-fluid"
-                                    />
-                                </Col>
-                                <Col xs={3}>
-                                <img
-                                        src={footerInfo.member7}
-                                        alt="logo"
-                                        className="img-fluid"
-                                    />
-                                </Col>
-                            </Row>
+                        <Col>
+                            <p className="fw-bold mb-1 footer-company-name">
+                                {footerInfo.companyName || 'LPK INTERNASIONAL PERSONEL MANAJEMEN INDONESIA'}
+                            </p>
+                            {footerInfo.tagline && (
+                                <p className="text-muted small mb-0">{footerInfo.tagline}</p>
+                            )}
                         </Col>
                     </Row>
+
+                    {/* Sub-row 2: address info */}
+                    <p className="fw-bold mb-1 small">{footerInfo.addressLabel || '本社所在地'}</p>
+                    <p className="footer-info-text mb-2">
+                        <i className="bi bi-geo-alt-fill footer-icon"></i> {footerInfo.address}
+                    </p>
+                    <p className="footer-info-text mb-2">
+                        <i className="bi bi-telephone-fill footer-icon"></i> {footerInfo.phone}
+                    </p>
+                    <p className="footer-info-text mb-0">
+                        <i className="bi bi-envelope-fill footer-icon"></i> {footerInfo.email}
+                    </p>
                 </Col>
+
+                {/* Right col – large: branch offices */}
+                <Col xs={12} md={8}>
+                    <Row className="g-3">
+                        {branches.map((branch, idx) => (
+                            <Col key={idx} xs={6} sm={4} md={3} className="d-flex flex-column">
+                                <p className="fw-bold footer-branch-title mb-2">{branch.title}</p>
+                                <p className="footer-info-text mb-2">
+                                    <i className="bi bi-geo-alt-fill footer-icon"></i> {branch.addr}
+                                </p>
+                                <p className="footer-info-text mb-0 mt-auto">
+                                    <i className="bi bi-envelope-fill footer-icon"></i> aloimtjapan@gmail.com
+                                </p>
+                            </Col>
+                        ))}
+                    </Row>
+                </Col>
+            </Row>
+
+            <hr className="footer-divider mx-4" />
+
+            {/* ── Row 3: 2 Col lớn ── */}
+            <Row className="align-items-center px-4 py-2 g-0 mb-5">
+
+                {/* Col lớn trái: ご連絡先 + social icons */}
+                <Col xs={12} md={3} className="d-flex align-items-center gap-3 mb-3 mb-md-0">
+                    <Link to="/contact" className="d-flex align-items-center gap-1 text-decoration-none text-dark">
+                        <i className="bi bi-check-circle-fill footer-contact-check"></i>
+                        <span className="footer-contact-label fw-bold small text-nowrap">
+                            {footerInfo.contact || 'ご連絡先'}
+                        </span>
+                    </Link>
+                    {footerInfo.facebook && (
+                        <a href={footerInfo.facebookUrl || 'https://www.facebook.com/profile.php?id=61577544040985'} target="_blank" rel="noopener noreferrer">
+                            <img src={footerInfo.facebook} alt="facebook" className="social-icon" />
+                        </a>
+                    )}
+                    {footerInfo.youtube && (
+                        <a href={footerInfo.youtubeUrl || 'https://www.youtube.com/@IMTJAPANESESCHOOL'} target="_blank" rel="noopener noreferrer">
+                            <img src={footerInfo.youtube} alt="youtube" className="social-icon" />
+                        </a>
+                    )}
+                </Col>
+
+                {/* Col lớn phải: label + 4 member orgs */}
+                <Col xs={12} md={9}>
+                    <Row className="align-items-center g-0">
+
+                        {/* Col nhỏ: label 所属団体 */}
+                        <Col xs={12} sm={3} className="mb-3 mb-sm-0">
+                            <p className="fw-bold small mb-0">
+                                {footerInfo.member || 'LPK IPM INDONESIAの所属団体'}
+                            </p>
+                        </Col>
+
+                        {/* Col nhỏ: mỗi member org */}
+                        {members.map((m, idx) => (
+                            <Col key={idx} xs={3} sm={true} className="d-flex flex-column align-items-center">
+                                <img src={m.img} alt={`member-${idx + 1}`} className="member-logo mb-1" />
+                                {m.name && (
+                                    <span className="footer-member-name fw-bold text-center">{m.name}</span>
+                                )}
+                                {m.label && (
+                                    <span className="footer-member-label text-center">{m.label}</span>
+                                )}
+                            </Col>
+                        ))}
+
+                    </Row>
+                </Col>
+
             </Row>
 
         </Container>

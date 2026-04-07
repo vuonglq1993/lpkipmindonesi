@@ -1,12 +1,23 @@
-import React, { useState } from "react";
-import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import './Contact.css';
 import { db } from '../../firebase/firebase';
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { collection, addDoc, Timestamp, doc, getDoc } from "firebase/firestore";
 import { useLanguage } from '../../context/LanguageContext';
 
 export default function Contact() {
     const { language } = useLanguage();
+    const [banner, setBanner] = useState(null);
+
+    useEffect(() => {
+        const fetchBanner = async () => {
+            const col = language === 'en' ? 'contactus' : 'contactusjp';
+            const snap = await getDoc(doc(db, col, 'banner'));
+            if (snap.exists()) setBanner(snap.data());
+        };
+        fetchBanner();
+    }, [language]);
+
     const [formData, setFormData] = useState({
         companyName: '',
         location: '',
@@ -46,12 +57,10 @@ export default function Contact() {
     };
 
     return (
-        <Container className="bg-white">
-            <Row className="contact-head">
-                <h1 className="text-white text-center fw-bold">
-                    {language === 'en' ? 'Contact' : 'お問い合わせ'}
-                </h1>
-            </Row>
+        <>
+            {banner?.img && (
+                <img src={banner.img} className="w-100" style={{ display: 'block' }} alt="" />
+            )}
 
             <Row className="justify-content-center">
                 <Col md={8}>
@@ -109,7 +118,7 @@ export default function Contact() {
                             </Form.Group>
 
                             <div className="text-center">
-                                <Button variant="danger" type="submit" disabled={submitting}>
+                                <Button variant="danger" className="mb-5" type="submit" disabled={submitting}>
                                     {submitting
                                         ? (language === 'en' ? 'Submitting...' : '送信中...')
                                         : (language === 'en' ? 'Check your input' : '入力内容を確認する')}
@@ -119,6 +128,6 @@ export default function Contact() {
                     )}
                 </Col>
             </Row>
-        </Container>
+        </>
     );
 }

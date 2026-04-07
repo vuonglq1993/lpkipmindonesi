@@ -145,6 +145,9 @@ const TiptapEditor = ({ content, onChange }) => {
             Image.configure({
                 inline: false,
                 allowBase64: true,
+                HTMLAttributes: {
+                    style: 'display:block; margin-left:auto; margin-right:auto;',
+                },
             }),
         ],
         content: content || "<p>Start writing here...</p>",

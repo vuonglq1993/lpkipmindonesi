@@ -14,18 +14,18 @@ export default function SpecifiedSkilledWorkerDispatchfromIndonesia() {
 
     useEffect(() => {
         const handleContextMenu = (e) => {
-          if (e.target.tagName === "IMG") {
-            e.preventDefault();
-          }
+            if (e.target.tagName === "IMG") {
+                e.preventDefault();
+            }
         };
-      
+
         document.addEventListener("contextmenu", handleContextMenu);
-      
+
         return () => {
-          document.removeEventListener("contextmenu", handleContextMenu);
+            document.removeEventListener("contextmenu", handleContextMenu);
         };
-      }, []);
-      
+    }, []);
+
     useEffect(() => {
         const fetchData = async () => {
             const contentCol = language === 'en' ? 'sv5en' : 'sv5jp';
@@ -51,10 +51,6 @@ export default function SpecifiedSkilledWorkerDispatchfromIndonesia() {
                 <title>Specified Skilled Worker Dispatch from Indonesia - {language === 'en' ? 'English' : 'Japanese'}</title>
                 <meta name="description" content="Specified Skilled Worker Dispatch from Indonesia" />
             </Helmet>
-
-            <Row className="service-head">
-            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Specified Skilled Worker Dispatch from Indonesia' : 'インドネシア人特定技能派遣'}</h1>
-            </Row>
             {loading ? (
                 <p className="text-center">Loading...</p>
             ) : (
@@ -62,7 +58,14 @@ export default function SpecifiedSkilledWorkerDispatchfromIndonesia() {
                     {/* Section sv501 */}
                     {sections.sv501 && (
                         <>
-                        <img src={sections.sv501?.img} className="w-100" style={{ display: "block" }}  alt="" />
+                            <img src={sections.sv501?.img} className="w-100" style={{ display: "block" }} alt="" />
+                        </>
+                    )}
+
+                    {/* Section sv502 */}
+                    {sections.sv502 && (
+                        <>
+                            <img src={sections.sv502?.img} className="w-100" style={{ display: "block" }} alt="" />
                         </>
                     )}
 

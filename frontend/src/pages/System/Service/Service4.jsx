@@ -52,9 +52,7 @@ export default function ComprehensiveSupportforMarketEntryintoIndonesia() {
                 <meta name="description" content="Comprehensive Support for Market Entry into Indonesia" />
             </Helmet>
 
-            <Row className="service-head">
-            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Comprehensive Support for Market Entry into Indonesia' : 'インドネシア進出総合サポート'}</h1>
-            </Row>
+
             {loading ? (
                 <p className="text-center">Loading...</p>
             ) : (
@@ -81,6 +79,13 @@ export default function ComprehensiveSupportforMarketEntryintoIndonesia() {
                     {/* Section sv104 */}
                     {sections.sv104 && (
                         <img src={sections.sv104?.img} className="w-100" style={{ display: "block" }}  alt="" />
+
+                    )}
+
+
+                    {/* Section sv105 */}
+                    {sections.sv105 && (
+                        <img src={sections.sv105?.img} className="w-100" style={{ display: "block" }}  alt="" />
 
                     )}
 

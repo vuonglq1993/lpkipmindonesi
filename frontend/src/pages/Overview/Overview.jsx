@@ -9,30 +9,43 @@ import "./Overview.css";
 export default function Overview() {
     const { language } = useLanguage();
     const [rows, setRows] = useState([]);
+    const [prf, setPrf] = useState(null);
+
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const handleContextMenu = (e) => {
-          if (e.target.tagName === "IMG") {
-            e.preventDefault();
-          }
+            if (e.target.tagName === "IMG") {
+                e.preventDefault();
+            }
         };
-      
+
         document.addEventListener("contextmenu", handleContextMenu);
-      
+
         return () => {
-          document.removeEventListener("contextmenu", handleContextMenu);
+            document.removeEventListener("contextmenu", handleContextMenu);
         };
-      }, []);
-      
+    }, []);
+
     useEffect(() => {
         const fetchData = async () => {
             const colName = language === 'en' ? 'UnionTable' : 'UnionTablejp';
             const snap = await getDocs(collection(db, colName));
             const data = [];
-            snap.forEach(doc => data.push({ id: doc.id, ...doc.data() }));
+            let prfData = null;
+
+            snap.forEach(doc => {
+                if (doc.id === 'prf') {
+                    prfData = doc.data(); // lấy prf riêng
+                } else {
+                    data.push({ id: doc.id, ...doc.data() });
+                }
+            });
+
             data.sort((a, b) => parseInt(a.id.replace('Row', '')) - parseInt(b.id.replace('Row', '')));
+
             setRows(data);
+            setPrf(prfData); // set prf
             setLoading(false);
         };
 
@@ -55,17 +68,19 @@ export default function Overview() {
     };
 
     return (
-        <Container fluid className=" bg-white">
+
+        <section className=" bg-white">
             {/* Section Header */}
-            <Row className="head">
-            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'COMPANY PROFILE' : '会社概要'}</h1>
-            </Row>
+            {/* Section prf */}
+        <img src={prf?.img} className="img-fluid" alt="" />
+1
 
             {/* Section Table */}
             {loading ? (
                 <p className="text-center">Loading...</p>
             ) : (
                 <Row className="justify-content-center">
+
                     <Col xs={12} md={10}>
                         <Table responsive className="table table-striped table-top-bottom-border">
                             <tbody>
@@ -78,6 +93,6 @@ export default function Overview() {
 
             {/* Contact section */}
             <ContactSection />
-        </Container>
+        </section>
     );
 }

@@ -63,14 +63,18 @@ export default function NavigationBar() {
                 <NavDropdown.Item as={Link} to="/skills" className={isActive('/skills')}>
                   {labels.skill}
                 </NavDropdown.Item>
-
-                <NavDropdown title={labels.ourService || "Our Service"} id="our-service-dropdown" className="me-3, ms-2">
-                  {labels.ourServiceItems && labels.ourServiceItems.map((item, index) => (
-                    <NavDropdown.Item key={index} as={Link} to={`/our-service/${index}`}>
-                      {item}
-                    </NavDropdown.Item>
-                  ))}
-                </NavDropdown>
+                <NavDropdown.Item as={Link} to="/our-service/4" className={isActive('/our-service/4')}>
+                  {labels.specified}
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/our-service/1" className={isActive('/our-service/1')}>
+                  {labels.dispatch}
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/our-service/2" className={isActive('/our-service/2')}>
+                  {labels.domestic}
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/our-service/3" className={isActive('/our-service/3')}>
+                  {labels.comprehensive}
+                </NavDropdown.Item>
               </NavDropdown>
 
 

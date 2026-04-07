@@ -15,18 +15,18 @@ export default function DispatchofIndonesianTechnicalInternTrainees() {
 
     useEffect(() => {
         const handleContextMenu = (e) => {
-          if (e.target.tagName === "IMG") {
-            e.preventDefault();
-          }
+            if (e.target.tagName === "IMG") {
+                e.preventDefault();
+            }
         };
-      
+
         document.addEventListener("contextmenu", handleContextMenu);
-      
+
         return () => {
-          document.removeEventListener("contextmenu", handleContextMenu);
+            document.removeEventListener("contextmenu", handleContextMenu);
         };
-      }, []);
-      
+    }, []);
+
     useEffect(() => {
         const fetchData = async () => {
             const contentCol = language === 'en' ? 'sv2en' : 'sv2jp';
@@ -53,9 +53,7 @@ export default function DispatchofIndonesianTechnicalInternTrainees() {
                 <meta name="description" content="Dispatch of Indonesian Technical Intern Trainees" />
             </Helmet>
 
-            <Row className="service-head">
-            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Dispatch of Indonesian Technical Intern Trainees' : 'インドネシア人技能実習生派遣'}</h1>
-            </Row>
+
             {loading ? (
                 <p className="text-center">Loading...</p>
             ) : (
@@ -63,17 +61,23 @@ export default function DispatchofIndonesianTechnicalInternTrainees() {
                     {/* Section sv201 */}
                     {sections.sv201 && (
                         <>
-                        <img src={sections.sv201?.img} className="w-100" style={{ display: "block" }}  alt="" />
+                            <img src={sections.sv201?.img} className="w-100" style={{ display: "block" }} alt="" />
                         </>
                     )}
 
                     {/* Section sv202 */}
                     {sections.sv202 && (
-                        <img src={sections.sv202?.img} className="w-100" style={{ display: "block" }}  alt="" />
+                        <img src={sections.sv202?.img} className="w-100" style={{ display: "block" }} alt="" />
 
                     )}
 
- 
+                    {/* Section sv203 */}
+                    {sections.sv203 && (
+                        <img src={sections.sv203?.img} className="w-100" style={{ display: "block" }} alt="" />
+
+                    )}
+
+
                 </>
             )}
 
