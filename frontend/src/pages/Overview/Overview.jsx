@@ -73,7 +73,6 @@ export default function Overview() {
             {/* Section Header */}
             {/* Section prf */}
         <img src={prf?.img} className="img-fluid" alt="" />
-1
 
             {/* Section Table */}
             {loading ? (

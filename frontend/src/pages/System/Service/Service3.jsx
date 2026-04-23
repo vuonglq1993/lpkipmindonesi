@@ -52,9 +52,7 @@ export default function DomesticRecruitmentofIndonesianTalent() {
                 <meta name="description" content="Domestic Recruitment of Indonesian Talent" />
             </Helmet>
 
-            <Row className="service-head">
-            <h1 className="text-white text-center fs-1 mb-5">{language === 'en' ? 'Domestic Recruitment of Indonesian Talent' : 'インドネシア人国内人財紹介'}</h1>
-            </Row>
+
             {loading ? (
                 <p className="text-center">Loading...</p>
             ) : (
@@ -63,6 +61,12 @@ export default function DomesticRecruitmentofIndonesianTalent() {
                     {sections.sv301 && (
                         <>
                         <img src={sections.sv301?.img} className="w-100" style={{ display: "block" }}  alt="" />
+                        </>
+                    )}
+                    {/* Section sv302 */}
+                    {sections.sv302 && (
+                        <>
+                        <img src={sections.sv302?.img} className="w-100" style={{ display: "block" }}  alt="" />
                         </>
                     )}
 

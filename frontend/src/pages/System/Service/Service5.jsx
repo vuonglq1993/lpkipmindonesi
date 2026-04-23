@@ -71,7 +71,15 @@ export default function SpecifiedSkilledWorkerDispatchfromIndonesia() {
 
                 </>
             )}
-
+                            {/* PDF Viewer */}
+                            <div className="pdf-viewer-wrapper">
+                                <iframe
+                                    src="/docs/giay-phep2.pdf"
+                                    className="pdf-viewer-frame"
+                                    title="Giấy phép kinh doanh"
+                                />
+                            </div>
+                
             <ContactSection />
         </Container>
     );

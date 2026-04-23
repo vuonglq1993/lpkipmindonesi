@@ -1,45 +1,17 @@
-.banner {
-    background: url(https://i.postimg.cc/BQQty5dq/TRANG-CH-17.png) no-repeat;
-    background-size: cover;
-    min-height: 600px;
-    padding-top: 200px;
+.home-carousel {
+    margin-top: 0;
 }
 
-  /* Màn hình ≥1200px (xl) */
-  @media (min-width: 1200px) {
-    .banner .fs-1 {
-      font-size: 3rem !important;
-    }
+.home-carousel-img {
+    width: 100%;
+    object-fit: cover;
+    max-height: 600px;
+}
 
-    .banner .fs-4 {
-        font-size: 1.5rem !important;
-      }
-  }
-  
-  /* Màn hình ≥1400px (xxl) */
-  @media (min-width: 1400px) {
-    .banner .fs-1 {
-      font-size: 2.5rem !important;
+@media (max-width: 768px) {
+    .home-carousel-img {
+        max-height: 280px;
     }
-
-    .banner .fs-4 {
-        font-size: 1.75rem !important;
-      }
-  }
-  
-  /* Nếu muốn cho 2K, 4K (≥1800px) */
-  @media (min-width: 1800px) {
-    .banner .fs-1 {
-      font-size: 4rem !important;
-    }
-    .banner .fs-4 {
-        font-size: 2.5rem !important;
-      }
-  }
-  
-  
-.banner .fs-1 {
-    text-shadow: 1px 1px 2px rgb(78, 115, 252);    
 }
 
 

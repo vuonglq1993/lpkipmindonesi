@@ -93,6 +93,14 @@ export default function SpecificSkillSystem() {
                     )}
                 </>
             )}
+                                        {/* PDF Viewer */}
+                            <div className="pdf-viewer-wrapper">
+                                <iframe
+                                    src="/docs/giay-phep1.pdf"
+                                    className="pdf-viewer-frame"
+                                    title="Giấy phép kinh doanh"
+                                />
+                            </div>
 
             <ContactSection />
         </Container>

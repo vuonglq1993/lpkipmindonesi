@@ -51,21 +51,23 @@ export default function NavigationBar() {
                 <NavDropdown.Item as={Link} to="/strength" className={isActive('/strength')}>
                   {labels.strength}
                 </NavDropdown.Item>
-              <Nav.Link as={Link} to="/overview" className={`ms-2 ${isActive('/overview')}`}>
-                {labels.overview}
-              </Nav.Link>
+                <Nav.Link as={Link} to="/overview" className={`ms-2 ${isActive('/overview')}`}>
+                  {labels.overview}
+                </Nav.Link>
               </NavDropdown>
 
               <NavDropdown title={labels.system || "System"} id="system-dropdown" className="me-3">
                 <NavDropdown.Item as={Link} to="/regulation" className={isActive('/regulation')}>
                   {labels.intern}
                 </NavDropdown.Item>
+
                 <NavDropdown.Item as={Link} to="/skills" className={isActive('/skills')}>
                   {labels.skill}
                 </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/our-service/4" className={isActive('/our-service/4')}>
                   {labels.specified}
                 </NavDropdown.Item>
+
                 <NavDropdown.Item as={Link} to="/our-service/1" className={isActive('/our-service/1')}>
                   {labels.dispatch}
                 </NavDropdown.Item>

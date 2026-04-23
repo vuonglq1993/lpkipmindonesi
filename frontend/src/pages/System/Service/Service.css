@@ -1,3 +1,25 @@
+.pdf-viewer-wrapper {
+    width: 55%;
+    margin: 48px auto;
+}
+
+.pdf-viewer-frame {
+    width: 100%;
+    height: 700px;
+    border: 1px solid #c5daea;
+    border-radius: 8px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .pdf-viewer-wrapper {
+        width: 92%;
+    }
+    .pdf-viewer-frame {
+        height: 480px;
+    }
+}
+
 .service-head {
     background: url(https://res.cloudinary.com/du73nhdbv/image/upload/v1774585672/HEA-02_mng8nn.jpg) no-repeat;
     height: 210px;

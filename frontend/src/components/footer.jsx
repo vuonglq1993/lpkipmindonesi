@@ -85,7 +85,9 @@ export default function Footer() {
                     {/* Sub-row 2: address info */}
                     <p className="fw-bold mb-1 small">{footerInfo.addressLabel || '本社所在地'}</p>
                     <p className="footer-info-text mb-2">
-                        <i className="bi bi-geo-alt-fill footer-icon"></i> {footerInfo.address}
+                        <a href="https://maps.app.goo.gl/taATnNaYqpNzd3dL6?g_st=iz" target="_blank" rel="noopener noreferrer">
+                            <i className="bi bi-geo-alt-fill footer-icon"></i> {footerInfo.address}
+                        </a>
                     </p>
                     <p className="footer-info-text mb-2">
                         <i className="bi bi-telephone-fill footer-icon"></i> {footerInfo.phone}
@@ -96,19 +98,51 @@ export default function Footer() {
                 </Col>
 
                 {/* Right col – large: branch offices */}
+                {/* Right col – large: branch offices */}
                 <Col xs={12} md={8}>
                     <Row className="g-3">
-                        {branches.map((branch, idx) => (
+
+                        {/* ── Fixed: b1 & b2 (có link riêng) ── */}
+                        {[1, 2].map((i, idx) => (
                             <Col key={idx} xs={6} sm={4} md={3} className="d-flex flex-column">
-                                <p className="fw-bold footer-branch-title mb-2">{branch.title}</p>
+                                <p className="fw-bold footer-branch-title mb-2">
+                                    {footerInfo[`b${i}title`]}
+                                </p>
                                 <p className="footer-info-text mb-2">
-                                    <i className="bi bi-geo-alt-fill footer-icon"></i> {branch.addr}
+                                    <a
+                                        href={i === 1
+                                            ? "https://maps.app.goo.gl/KYXmBFMn2GjXKCAQ9?g_st=iz"
+                                            : " https://maps.app.goo.gl/bWS2cbwx5qmj7wBv8?g_st=il"
+                                        }
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <i className="bi bi-geo-alt-fill footer-icon"></i>
+                                        {footerInfo[`b${i}addr`]}
+                                    </a>
                                 </p>
                                 <p className="footer-info-text mb-0 mt-auto">
-                                    <i className="bi bi-envelope-fill footer-icon"></i> aloimtjapan@gmail.com
+                                    <i className="bi bi-envelope-fill footer-icon"></i>
+                                    {footerInfo[`b${i}email`] || 'aloimtjapan@gmail.com'}
                                 </p>
                             </Col>
                         ))}
+
+                        {/* ── Dynamic: b3 → b5 (map như cũ) ── */}
+                        {branches.slice(2).map((branch, idx) => (
+                            <Col key={idx} xs={6} sm={4} md={3} className="d-flex flex-column">
+                                <p className="fw-bold footer-branch-title mb-2">{branch.title}</p>
+                                <p className="footer-info-text mb-2">
+                                    <i className="bi bi-geo-alt-fill footer-icon"></i>
+                                    {branch.addr}
+                                </p>
+                                <p className="footer-info-text mb-0 mt-auto">
+                                    <i className="bi bi-envelope-fill footer-icon"></i>
+                                    {branch.email || 'aloimtjapan@gmail.com'}
+                                </p>
+                            </Col>
+                        ))}
+
                     </Row>
                 </Col>
             </Row>

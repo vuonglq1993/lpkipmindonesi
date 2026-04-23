@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Carousel } from 'react-bootstrap';
 import { db } from '../../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useLanguage } from '../../context/LanguageContext';
@@ -57,17 +57,26 @@ export default function Home() {
     return (
         <Container fluid className="home-head pt-5 bg-white">
             <Row className="justify-content-center">
-                {/* Slide */}
-                <div className="banner">
-                    <Container>
-                        <Col sm={12} lg={6}>
-                            <p className="fs-1 fw-bold ms-4 text-white">{content.banner.title}</p>
-                            <p className="fs-4 ms-4 fw-lighter text-black">{content.banner.description}</p>
-
-                        </Col>
-                    </Container>
-
-                </div>
+                {/* Carousel Banner */}
+                {(() => {
+                    const slides = [1,2,3,4,5,6]
+                        .map(i => content.banner[`slide${i}`])
+                        .filter(Boolean);
+                    if (!slides.length) return null;
+                    return (
+                        <Carousel interval={4000} className="home-carousel mt-4 w-100 px-0">
+                            {slides.map((src, idx) => (
+                                <Carousel.Item key={idx}>
+                                    <img
+                                        src={src}
+                                        alt={`slide-${idx + 1}`}
+                                        className="d-block w-100 home-carousel-img"
+                                    />
+                                </Carousel.Item>
+                            ))}
+                        </Carousel>
+                    );
+                })()}
 
                 {/* H01 */}
                 <Row className="py-5 text-center justify-content-center">
