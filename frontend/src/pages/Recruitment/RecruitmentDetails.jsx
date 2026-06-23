@@ -11,21 +11,31 @@ export default function RecruitmentDetail() {
     const { language } = useLanguage();
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [banner, setBanner] = useState(null);
+
 
     useEffect(() => {
+        const fetchBanner = async () => {
+            const col = language === 'en' ? 'recruitment' : 'recruitmentjp';
+            const snap = await getDoc(doc(db, col, 'banner'));
+            if (snap.exists()) setBanner(snap.data());
+        };
+        fetchBanner();
+    }, [language]);
+    useEffect(() => {
         const handleContextMenu = (e) => {
-          if (e.target.tagName === "IMG") {
-            e.preventDefault();
-          }
+            if (e.target.tagName === "IMG") {
+                e.preventDefault();
+            }
         };
-      
+
         document.addEventListener("contextmenu", handleContextMenu);
-      
+
         return () => {
-          document.removeEventListener("contextmenu", handleContextMenu);
+            document.removeEventListener("contextmenu", handleContextMenu);
         };
-      }, []);
-      
+    }, []);
+
     useEffect(() => {
         const fetchArticle = async () => {
             const col = language === 'en' ? 'recruitment' : 'recruitmentjp';
@@ -40,28 +50,31 @@ export default function RecruitmentDetail() {
     }, [id, language]);
 
     return (
-        <Container className="pt-0 pb-5 bg-white">
-            {loading ? (
-                <p className="text-center">Loading...</p>
-            ) : article ? (
-                <>
-                    <Row className="recruitment-head">
-                        <p className="text-white text-center fw-bold fs-1">{language === 'en' ? 'Recruitment' : '募集'}</p>
-                    </Row>
-                    <Row className="mb-4 bg-light justify-content-center">
-                        <Col xs={10}>
-                            <h1>{article.name}</h1>
-                            {article.image && (
-                                <img src={article.image} alt={article.name} className="img-fluid my-4" />
-                            )}
-                            <div className="rendered-article"  dangerouslySetInnerHTML ={{ __html: article.description }} /> 
-
-                        </Col>
-                    </Row>
-                </>
-            ) : (
-                <p className="text-center">Article not found.</p>
+        <>
+            {banner?.img && (
+                <img src={banner.img} className="w-100" style={{ display: 'block' }} alt="" />
             )}
-        </Container>
+            <Container className="pt-0 pb-5 bg-white">
+                {loading ? (
+                    <p className="text-center">Loading...</p>
+                ) : article ? (
+                    <>
+                        <Row className="mb-4 bg-light justify-content-center">
+                            <Col xs={10}>
+                                <h1>{article.name}</h1>
+                                {article.image && (
+                                    <img src={article.image} alt={article.name} className="img-fluid my-4" />
+                                )}
+                                <div className="rendered-article" dangerouslySetInnerHTML={{ __html: article.description }} />
+
+                            </Col>
+                        </Row>
+                    </>
+                ) : (
+                    <p className="text-center">Article not found.</p>
+                )}
+            </Container>
+        </>
+
     );
 }

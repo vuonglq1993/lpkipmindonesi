@@ -11,21 +11,30 @@ export default function NewsDetail() {
     const { language } = useLanguage();
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [banner, setBanner] = useState(null);
 
     useEffect(() => {
+        const fetchBanner = async () => {
+            const col = language === 'en' ? 'news' : 'newsjp';
+            const snap = await getDoc(doc(db, col, 'banner'));
+            if (snap.exists()) setBanner(snap.data());
+        };
+        fetchBanner();
+    }, [language]);
+    useEffect(() => {
         const handleContextMenu = (e) => {
-          if (e.target.tagName === "IMG") {
-            e.preventDefault();
-          }
+            if (e.target.tagName === "IMG") {
+                e.preventDefault();
+            }
         };
-      
+
         document.addEventListener("contextmenu", handleContextMenu);
-      
+
         return () => {
-          document.removeEventListener("contextmenu", handleContextMenu);
+            document.removeEventListener("contextmenu", handleContextMenu);
         };
-      }, []);
-      
+    }, []);
+
     useEffect(() => {
         const fetchArticle = async () => {
             const col = language === 'en' ? 'news' : 'newsjp';
@@ -40,32 +49,36 @@ export default function NewsDetail() {
     }, [id, language]);
 
     return (
-        <Container fluid className=" bg-white">
-            {loading ? (
-                <p className="text-center">Loading...</p>
-            ) : article ? (
-                <>
-                    <Row className="news-head">
-                        <h1 className="text-white text-center fw-bold">{language === 'en' ? 'News' : 'ニュース'}</h1>
-                    </Row>
-                    <Row className="mb-4 bg-light justify-content-center py-5">
-                        <Col xs={10}>
-                            <h1>{article.title}</h1>
-                            <p className="text-muted">
-                                {new Date(article.date.seconds * 1000).toLocaleDateString()}
-                            </p>
-                            {article.image && (
-                                <img src={article.image} alt={article.title} className="img-fluid my-4" />
-                            )}
-                            <div className="rendered-article"  dangerouslySetInnerHTML ={{ __html: article.content }} /> 
-
-                        </Col>
-                    </Row>
-                    <ContactSection />
-                </>
-            ) : (
-                <p className="text-center">Article not found.</p>
+        <>
+            {banner?.img && (
+                <img src={banner.img} className="w-100" style={{ display: 'block' }} alt="" />
             )}
-        </Container>
+            <Container fluid className=" bg-white">
+
+                {loading ? (
+                    <p className="text-center">Loading...</p>
+                ) : article ? (
+                    <>
+
+                        <Row className="mb-4 bg-light justify-content-center py-5">
+                            <Col xs={10}>
+                                <h1>{article.title}</h1>
+                                <p className="text-muted">
+                                    {new Date(article.date.seconds * 1000).toLocaleDateString()}
+                                </p>
+                                {article.image && (
+                                    <img src={article.image} alt={article.title} className="img-fluid my-4" />
+                                )}
+                                <div className="rendered-article" dangerouslySetInnerHTML={{ __html: article.content }} />
+
+                            </Col>
+                        </Row>
+                        <ContactSection />
+                    </>
+                ) : (
+                    <p className="text-center">Article not found.</p>
+                )}
+            </Container>
+        </>
     );
 }

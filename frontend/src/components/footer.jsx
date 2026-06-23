@@ -54,6 +54,11 @@ export default function Footer() {
     return (
         <Container className="footer text-dark px-0 pb-4">
 
+            {/* ── Title ── */}
+            <p className="footer-member-title text-center pt-4 mb-2">
+                {language === 'en' ? 'Our members' : 'メンバー紹介'}
+            </p>
+
             {/* ── Row 1: Partner logos ── */}
             <div className="partner-row">
                 {partners.map((src, idx) => (
@@ -85,7 +90,7 @@ export default function Footer() {
                     {/* Sub-row 2: address info */}
                     <p className="fw-bold mb-1 small">{footerInfo.addressLabel || '本社所在地'}</p>
                     <p className="footer-info-text mb-2">
-                        <a href="https://maps.app.goo.gl/taATnNaYqpNzd3dL6?g_st=iz" target="_blank" rel="noopener noreferrer">
+                        <a href=" https://maps.app.goo.gl/KYXmBFMn2GjXKCAQ9?g_st=iz" target="_blank" rel="noopener noreferrer">
                             <i className="bi bi-geo-alt-fill footer-icon"></i> {footerInfo.address}
                         </a>
                     </p>
@@ -111,7 +116,7 @@ export default function Footer() {
                                 <p className="footer-info-text mb-2">
                                     <a
                                         href={i === 1
-                                            ? "https://maps.app.goo.gl/KYXmBFMn2GjXKCAQ9?g_st=iz"
+                                            ? "https://maps.app.goo.gl/taATnNaYqpNzd3dL6?g_st=iz"
                                             : " https://maps.app.goo.gl/bWS2cbwx5qmj7wBv8?g_st=il"
                                         }
                                         target="_blank"

@@ -73,7 +73,7 @@ export default function EditrecruitmentPage() {
 
       {/* Create New */}
       <div className="text-center mt-4">
-        <Button onClick={() => navigate('/admin/create')} variant="success">
+        <Button onClick={() => navigate('/admin/recruitment')} variant="success">
           + Create New Job
         </Button>
       </div>
